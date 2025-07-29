@@ -3,7 +3,7 @@ import { PoolClient } from 'pg';
 
 export default async (connection) => {
   // Create Roles table
-  await connection.query(`
+  await execute(connection,`
     CREATE TABLE IF NOT EXISTS roles (
       id SERIAL PRIMARY KEY,
       name TEXT UNIQUE NOT NULL,
@@ -12,7 +12,7 @@ export default async (connection) => {
   `);
 
   // Create Permissions table
-  await connection.query(`
+  await execute(connection,`
     CREATE TABLE IF NOT EXISTS permissions (
       id SERIAL PRIMARY KEY,
       name TEXT UNIQUE NOT NULL,
@@ -21,7 +21,7 @@ export default async (connection) => {
   `);
 
   // Many-to-many Role_Permissions
-  await connection.query(`
+  await execute(connection,`
     CREATE TABLE IF NOT EXISTS role_permissions (
       role_id INT NOT NULL REFERENCES roles(id),
       permission_id INT NOT NULL REFERENCES permissions(id),
@@ -30,7 +30,7 @@ export default async (connection) => {
   `);
 
   // User_Roles linking table
-  await connection.query(`
+  await execute(connection,`
     CREATE TABLE IF NOT EXISTS user_roles (
       user_id INT NOT NULL REFERENCES users(id),
       role_id INT NOT NULL REFERENCES roles(id),
@@ -39,7 +39,7 @@ export default async (connection) => {
   `);
 
   // Add vendorId column to Products
-  await connection.query(`
+  await execute(connection,`
     ALTER TABLE products
     ADD COLUMN IF NOT EXISTS vendor_id INT REFERENCES users(id);
   `);

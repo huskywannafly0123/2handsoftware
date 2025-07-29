@@ -8,8 +8,8 @@
                 "priority": 10
             },
             {
-                "name": "vendor-role",
-                "resolve": "extensions/vendor-role",
+                "name": "vendor_role",
+                "resolve": "extensions/vendor_role",
                 "enabled": true,
                 "priority": 5
             }

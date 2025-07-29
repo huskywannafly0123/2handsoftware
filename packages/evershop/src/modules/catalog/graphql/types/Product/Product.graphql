@@ -19,6 +19,8 @@ type Product {
   groupId: ID
   url: String
   productType: String
+  vendorId: ID
+  vendor: AdminUser
 }
 
 """
@@ -29,6 +31,13 @@ type ProductCollection {
   currentPage: Int!
   total: Int!
   currentFilters: [Filter]
+}
+
+type AdminUser {
+  userId: ID
+  fullName: String
+  email: String
+  role: String
 }
 
 extend type Query {
