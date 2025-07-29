@@ -273,6 +273,24 @@ export default function General({
               id: 'SKUPriceWeight'
             },
             {
+              component: { default: Field },
+              props: {
+                id: 'product_type',
+                name: 'product_type',
+                label: 'Product Type',
+                type: 'select',
+                options: [
+                  { value: 'email', text: 'Email' },
+                  { value: 'account', text: 'Account' },
+                  { value: 'software', text: 'Software' },
+                  { value: 'other', text: 'Other' }
+                ],
+                value: product?.productType || 'account'
+              },
+              sortOrder: 21,
+              id: 'product_type'
+            },
+            {
               component: { default: CategorySelect },
               props: {
                 product

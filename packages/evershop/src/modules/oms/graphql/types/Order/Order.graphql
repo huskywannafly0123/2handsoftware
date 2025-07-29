@@ -90,6 +90,7 @@ type Order implements ShoppingCart {
   updatedAt: String!
   activities: [Activity]
   shipment: Shipment
+  accounts: [Account]
 }
 
 """
@@ -113,6 +114,23 @@ type Shipment {
   trackingNumber: String
   createdAt: DateTime!
   updatedAt: DateTime
+}
+
+"""
+Represents an Account.
+"""
+type Account {
+  accountId: ID!
+  productId: Int!
+  username: String
+  password: String!
+  accessDetail: String
+  key: String
+  status: String!
+  clientEmail: String
+  expirationDate: String
+  soldAt: String
+  orderId: Int
 }
 
 """

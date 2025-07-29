@@ -27,6 +27,14 @@ module.exports = {
         .execute(pool);
       return items.map((item) => camelCase(item));
     },
+    accounts: async ({ orderId }, _, { pool }) => {
+      // Only return accounts assigned to this order
+      const accounts = await select()
+        .from('account')
+        .where('order_id', '=', orderId)
+        .execute(pool);
+      return accounts.map((a) => camelCase(a));
+    },
     shippingAddress: async ({ shippingAddressId }, _, { pool }) => {
       const address = await select()
         .from('order_address')
