@@ -10,8 +10,10 @@ export default function CustomerInfo({
     customerFullName,
     customerEmail,
     paymentMethodName,
+    paymentStatus,
     shippingAddress,
-    billingAddress
+    billingAddress,
+    accounts = []
   }
 }) {
   return (
@@ -65,6 +67,44 @@ export default function CustomerInfo({
           </div>
         </div>
       </div>
+      
+      {/* Only show account information if payment status is 'paid' */}
+      {paymentStatus?.code === 'paid' && accounts.length > 0 && (
+        <div className="account-info mt-8 mb-8 p-4 border border-divider rounded">
+          <h3>{_('Account Information')}</h3>
+          <table className="w-full mt-2">
+            <thead>
+              <tr>
+                <th className="text-left">{_('Username')}</th>
+                <th className="text-left">{_('Password')}</th>
+                <th className="text-left">{_('Key')}</th>
+                <th className="text-left">{_('Expiration Date')}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {accounts.map((acc) => (
+                <tr key={acc.accountId}>
+                  <td>{acc.username}</td>
+                  <td>{acc.password}</td>
+                  <td>{acc.key}</td>
+                  <td>{acc.expirationDate}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+      
+      {/* Show payment pending message if payment is not yet completed */}
+      {paymentStatus?.code !== 'paid' && (
+        <div className="payment-pending-info mt-8 mb-8 p-4 border border-warning rounded bg-warning-light">
+          <h3>{_('Payment Processing')}</h3>
+          <p className="text-textSubdued mt-2">
+            {_('Your payment is being processed. Account information will be displayed once payment is confirmed.')}
+          </p>
+        </div>
+      )}
+      
       <Button url="/" title={_('CONTINUE SHOPPING')} />
     </div>
   );
@@ -76,6 +116,12 @@ CustomerInfo.propTypes = {
     customerFullName: PropTypes.string,
     customerEmail: PropTypes.string.isRequired,
     paymentMethodName: PropTypes.string.isRequired,
+    paymentStatus: PropTypes.shape({
+      code: PropTypes.string,
+      name: PropTypes.string,
+      badge: PropTypes.string,
+      progress: PropTypes.string
+    }),
     shippingNote: PropTypes.string,
     shippingAddress: PropTypes.shape({
       fullName: PropTypes.string,
@@ -124,6 +170,12 @@ export const query = `
       customerFullName
       customerEmail
       paymentMethodName
+      paymentStatus {
+        code
+        name
+        badge
+        progress
+      }
       shippingNote
       shippingAddress {
         fullName
@@ -156,6 +208,13 @@ export const query = `
         city
         address1
         address2
+      }
+      accounts {
+        accountId
+        username
+        password
+        key
+        expirationDate
       }
     }
   }

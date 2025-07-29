@@ -11,6 +11,7 @@ const {
   updatePaymentStatus
 } = require('../../../oms/services/updatePaymentStatus');
 const { createAxiosInstance } = require('../../services/requester');
+const { assignAccountsAfterPayment } = require('../../../checkout/services/orderCreator');
 
 // eslint-disable-next-line no-unused-vars
 module.exports = async (request, response, delegate, next) => {
@@ -56,6 +57,10 @@ module.exports = async (request, response, delegate, next) => {
       if (transactionDetails.data.status === 'CAPTURED') {
         // Update payment status
         await updatePaymentStatus(order.order_id, 'paid');
+        
+        // Assign accounts to the order after successful payment
+        await assignAccountsAfterPayment(order.order_id, pool);
+        
         // Save order activities
         await insert('order_activity')
           .given({
@@ -77,6 +82,10 @@ module.exports = async (request, response, delegate, next) => {
         if (responseData.data.status === 'COMPLETED') {
           // Update payment status
           await updatePaymentStatus(order.order_id, 'paid');
+          
+          // Assign accounts to the order after successful payment
+          await assignAccountsAfterPayment(order.order_id, pool);
+          
           // Save order activities
           await insert('order_activity')
             .given({

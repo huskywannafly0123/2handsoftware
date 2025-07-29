@@ -7,6 +7,7 @@ const {
 const {
   updatePaymentStatus
 } = require('../../../oms/services/updatePaymentStatus');
+const { assignAccountsAfterPayment } = require('../../../checkout/services/orderCreator');
 
 // eslint-disable-next-line no-unused-vars
 module.exports = async (request, response, delegate, next) => {
@@ -33,6 +34,9 @@ module.exports = async (request, response, delegate, next) => {
   } else {
     // Update order payment status
     await updatePaymentStatus(order.order_id, 'paid', pool);
+
+    // Assign accounts to the order after successful payment
+    await assignAccountsAfterPayment(order.order_id, pool);
 
     // Add transaction data to database
     await insert('payment_transaction')

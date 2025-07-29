@@ -2,14 +2,14 @@ const { select, insert } = require('@evershop/postgres-query-builder');
 const { pool } = require('@evershop/evershop/src/lib/postgres/connection');
 const {
   INVALID_PAYLOAD,
-  OK,
-  INTERNAL_SERVER_ERROR
+  INTERNAL_SERVER_ERROR,
+  OK
 } = require('@evershop/evershop/src/lib/util/httpStatus');
 const { error } = require('@evershop/evershop/src/lib/log/logger');
-const {
-  updatePaymentStatus
-} = require('../../../oms/services/updatePaymentStatus');
-const { createAxiosInstance } = require('../../services/requester');
+const { getSetting } = require('../../../setting/services/setting');
+const { createAxiosInstance } = require('../../services/createAxiosInstance');
+const { updatePaymentStatus } = require('../../../oms/services/updatePaymentStatus');
+const { assignAccountsAfterPayment } = require('../../../checkout/services/orderCreator');
 
 // eslint-disable-next-line no-unused-vars
 module.exports = async (request, response, delegate, next) => {
@@ -40,6 +40,10 @@ module.exports = async (request, response, delegate, next) => {
       if (responseData.data.status === 'COMPLETED') {
         // Update payment status
         await updatePaymentStatus(order.order_id, 'paid');
+        
+        // Assign accounts to the order after successful payment
+        await assignAccountsAfterPayment(order.order_id, pool);
+        
         // Add transaction data to database
         await insert('payment_transaction')
           .given({

@@ -126,6 +126,65 @@ async function saveOrderItems(cart, order, connection) {
   return savedItems;
 }
 
+async function assignAccountsToOrder(order, connection) {
+  // Get order items
+  const orderItems = await select('*')
+    .from('order_item')
+    .where('order_item_order_id', '=', order.order_id)
+    .execute(connection);
+  for (const item of orderItems) {
+    // Find unsold accounts for this product
+    const accounts = await select('*')
+      .from('account')
+      .where('product_id', '=', item.product_id)
+      .and('order_id', 'IS', 'NULL')
+      .execute(connection);
+    // Assign each account to this order
+    for (const acc of accounts) {
+      await update('account')
+        .given({
+          order_id: order.order_id,
+          sold_at: new Date().toISOString()
+        })
+        .where('account_id', '=', acc.account_id)
+        .execute(connection);
+    }
+  }
+}
+
+// New function to assign accounts after successful payment
+async function assignAccountsAfterPayment(orderId, connection) {
+  console.log("orderId", orderId);
+  // Get order items
+  const orderItems = await select('*')
+    .from('order_item')
+    .where('order_item_order_id', '=', orderId)
+    .execute(connection);
+  
+  console.log("orderItems", orderItems);
+  for (const item of orderItems) {
+    // Find unsold accounts for this product
+    const accounts = await select('*')
+      .from('account')
+      .limit(0, item.qty)
+      .where('product_id', '=', item.product_id)
+      .and('order_id', 'IS NULL')
+      .execute(connection);
+    
+    console.log("accounts", accounts);
+    // Assign each account to this order
+    for (const acc of accounts) {
+      await update('account')
+        .given({
+          order_id: orderId,
+          sold_at: new Date().toISOString()
+        })
+        .where('account_id', '=', acc.account_id)
+        .execute(connection);
+    }
+  }
+}
+
 async function saveOrderActivity(orderID, connection) {
   // Save order activities
   await insert('order_activity')
@@ -180,3 +239,6 @@ exports.createOrder = async (cart) => {
   })(cart);
   return order;
 };
+
+exports.assignAccountsToOrder = assignAccountsToOrder;
+exports.assignAccountsAfterPayment = assignAccountsAfterPayment;

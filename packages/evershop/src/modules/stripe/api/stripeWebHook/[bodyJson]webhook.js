@@ -18,6 +18,7 @@ const { getSetting } = require('../../../setting/services/setting');
 const {
   updatePaymentStatus
 } = require('../../../oms/services/updatePaymentStatus');
+const { assignAccountsAfterPayment } = require('../../../checkout/services/orderCreator');
 
 // eslint-disable-next-line no-unused-vars
 module.exports = async (request, response, delegate, next) => {
@@ -80,6 +81,9 @@ module.exports = async (request, response, delegate, next) => {
 
         if (!transaction) {
           await updatePaymentStatus(order.order_id, 'paid', connection);
+
+          // Assign accounts to the order after successful payment
+          await assignAccountsAfterPayment(order.order_id, connection);
 
           // Add an activity log
           await insert('order_activity')

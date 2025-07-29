@@ -8,6 +8,8 @@ const {
 } = require('@evershop/evershop/src/lib/util/httpStatus');
 const { getApiBaseUrl } = require('../../services/getApiBaseUrl');
 const { getSetting } = require('../../../../packages/evershop/src/modules/setting/services/setting');
+const { error } = require('@evershop/evershop/src/lib/log/logger');
+const { assignAccountsAfterPayment } = require('../../../../packages/evershop/src/modules/checkout/services/orderCreator');
 
 // eslint-disable-next-line no-unused-vars
 module.exports = async (request, response, delegate, next) => {
@@ -60,6 +62,10 @@ module.exports = async (request, response, delegate, next) => {
         .given({ payment_status: 'paid' })
         .where('integration_order_id', '=', requestId)
         .execute(pool);
+        
+      // Assign accounts to the order after successful payment
+      await assignAccountsAfterPayment(order.order_id, pool);
+      
       // Add transaction data to database
       await insert('payment_transaction')
         .given({
