@@ -6,10 +6,12 @@ const deleteProduct = require('../../services/product/deleteProduct');
 
 // eslint-disable-next-line no-unused-vars
 module.exports = async (request, response, delegate, next) => {
+  const currentAdminUser = request.getCurrentUser();
   try {
     const { id } = request.params;
     const product = await deleteProduct(id, {
-      routeId: request.currentRoute.id
+      routeId: request.currentRoute.id,
+      user: currentAdminUser
     });
     response.status(OK);
     response.json({

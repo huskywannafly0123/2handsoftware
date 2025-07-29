@@ -20,6 +20,8 @@ async function deleteProductData(uuid, connection) {
  * @param {Object} context
  */
 async function deleteProduct(uuid, context) {
+  const {user} = context;
+  const userId = user.user_id ? user.user_id : user.admin_user_id;
   const connection = await getConnection();
   await startTransaction(connection);
   try {
@@ -35,6 +37,9 @@ async function deleteProduct(uuid, context) {
     const product = await query.where('uuid', '=', uuid).load(connection);
     if (!product) {
       throw new Error('Invalid product id');
+    }
+    if (user.role === 'vendor') {
+      if (product.vendor_id != userId) throw new Error("Cannot delete someone else's product")
     }
     await hookable(deleteProductData, { ...context, connection, product })(
       uuid,

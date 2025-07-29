@@ -19,4 +19,10 @@ module.exports = exports = async (connection) => {
       CONSTRAINT "FK_PRODUCT_ACCOUNT" FOREIGN KEY ("product_id") REFERENCES "product" ("product_id") ON DELETE CASCADE
     )`
   );
+  await execute(connection,
+    `ALTER TABLE "admin_user" ADD COLUMN IF NOT EXISTS "role" VARCHAR(20) DEFAULT 'admin'`
+  );
+  await execute(connection,
+    `ALTER TABLE "product" ADD COLUMN IF NOT EXISTS "vendor_id" INT REFERENCES "admin_user"("admin_user_id")`
+  )
 };

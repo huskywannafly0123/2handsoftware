@@ -54,6 +54,16 @@ module.exports = {
           }
         ];
       }
+    },
+    vendorId: prod => prod.vendor_id,
+    vendor: async (product, _, ctx) => {
+      if (!product.vendor_id) return null;
+      const vendorQuery = await select()
+        .from('admin_user')
+        .where('admin_user_id', '=', product.vendor_id)
+        .load(pool);
+      if (!vendorQuery) return null;
+      return vendorQuery;
     }
   },
   Query: {
@@ -68,7 +78,12 @@ module.exports = {
       }
     },
     products: async (_, { filters = [] }, { user }) => {
+      const userId = user.user_id ? user.user_id : user.admin_user_id;
+      const {role} = user;
       const query = getProductsBaseQuery();
+      if (role == 'vendor'){
+        query.where('vendor_id', '=', userId);
+      }
       const root = new ProductCollection(query);
       await root.init(filters, !!user);
       return root;

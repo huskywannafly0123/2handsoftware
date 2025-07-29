@@ -179,11 +179,15 @@ async function insertProductData(data, connection) {
  * @param {Object} context
  */
 async function createProduct(data, context) {
+  const { user } = context;
   const connection = await getConnection();
   await startTransaction(connection);
   try {
     const productData = await getValue('productDataBeforeCreate', data);
-
+    if (user.role === 'vendor') {
+      productData.vendor_id = user.user_id ? user.user_id : user.admin_user_id;
+      productData.status = 0;
+    }
     // Validate product data
     validateProductDataBeforeInsert(productData);
 
@@ -227,6 +231,7 @@ module.exports = async (data, context) => {
   if (context && typeof context !== 'object') {
     throw new Error('Context must be an object');
   }
+  console.log(context)
   const product = await hookable(createProduct, context)(data, context);
   return product;
 };
