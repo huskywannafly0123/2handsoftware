@@ -326,7 +326,7 @@ async function updateProductData(uuid, data, connection) {
  * @param {Object} context
  */
 async function updateProduct(uuid, data, context) {
-  const user = req.user;
+  const {user} = req;
   const userId = user.user_id ? user.user_id : user.admin_user_id;
   const connection = await getConnection();
   await startTransaction(connection);
@@ -353,7 +353,7 @@ async function updateProduct(uuid, data, context) {
     }
     if (user.role === 'admin' && product.vendor_id) {
       const allowedFields = ['status'];
-      for (let field in productData) {
+      for (const field in productData) {
         if (!allowedFields.includes(field)) {
           delete updateFields[field]; // strip out any detail changes
         }
