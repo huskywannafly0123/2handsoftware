@@ -10,7 +10,8 @@ export default function CatalogMenuGroup({
   productGrid,
   categoryGrid,
   attributeGrid,
-  collectionGrid
+  collectionGrid,
+  user
 }) {
   return (
     <NavigationItemGroup
@@ -20,17 +21,17 @@ export default function CatalogMenuGroup({
         {
           Icon: ProductIcon,
           url: productGrid,
-          title: 'Products'
+          title: 'Sản phẩm'
         },
         {
           Icon: CategoryIcon,
           url: categoryGrid,
-          title: 'Categories'
+          title: 'Danh mục'
         },
         {
           Icon: CollectionIcon,
           url: collectionGrid,
-          title: 'Collections'
+          title: 'Bộ sưu tập'
         },
         {
           Icon: AttributeIcon,
@@ -46,7 +47,8 @@ CatalogMenuGroup.propTypes = {
   attributeGrid: PropTypes.string.isRequired,
   categoryGrid: PropTypes.string.isRequired,
   collectionGrid: PropTypes.string.isRequired,
-  productGrid: PropTypes.string.isRequired
+  productGrid: PropTypes.string.isRequired,
+  user: PropTypes.any
 };
 
 export const layout = {
@@ -60,5 +62,9 @@ export const query = `
     categoryGrid: url(routeId:"categoryGrid")
     attributeGrid: url(routeId:"attributeGrid")
     collectionGrid: url(routeId:"collectionGrid")
+    user: currentAdminUser{
+      role
+      adminUserId
+    }
   }
 `;

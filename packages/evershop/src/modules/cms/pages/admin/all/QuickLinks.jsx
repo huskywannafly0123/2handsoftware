@@ -3,12 +3,13 @@ import React from 'react';
 import Icon from '@heroicons/react/solid/esm/HomeIcon';
 import NavigationItemGroup from '@components/admin/cms/NavigationItemGroup';
 
-export default function QuickLinks({ dashboard }) {
+export default function QuickLinks({ dashboard, user }) {
+  const isVendor = user && user.role == 'vendor';
   return (
     <NavigationItemGroup
       id="quickLinks"
       name="Quick links"
-      items={[
+      items={isVendor ? [] : [
         {
           Icon,
           url: dashboard,
@@ -20,7 +21,8 @@ export default function QuickLinks({ dashboard }) {
 }
 
 QuickLinks.propTypes = {
-  dashboard: PropTypes.string.isRequired
+  dashboard: PropTypes.string.isRequired,
+  user: PropTypes.any
 };
 
 export const layout = {
@@ -31,5 +33,9 @@ export const layout = {
 export const query = `
   query Query {
     dashboard: url(routeId: "dashboard")
+    user: currentAdminUser{
+      role
+      adminUserId
+    }
   }
 `;

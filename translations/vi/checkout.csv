@@ -1,0 +1,59 @@
+Total,Tổng cộng
+Order,Đơn hàng
+Sku,SKU
+Continue to shipping,Tiếp tục tới giao hàng
+Continue shopping,Tiếp tục mua sắm
+Continue Shopping,Tiếp tục mua sắm
+CONTINUE SHOPPING,TIẾP TỤC MUA SẮM
+Shopping cart,Giỏ hàng
+Product,Sản phẩm
+Price,Giá
+Quantity,Số lượng
+Remove,Xóa
+Qty,SL
+Sub total,Tạm tính
+Discount(${coupon}),Giảm giá(${coupon})
+Order summary,Tóm tắt đơn hàng
+Taxes and shipping calculated at checkout,Thuế và phí giao hàng sẽ được tính ở bước thanh toán
+CHECKOUT,THANH TOÁN
+Change,Thay đổi
+Payment Method,Phương thức thanh toán
+Shipping Address,Địa chỉ giao hàng
+Shipping Method,Phương thức giao hàng
+No payment methods available,Không có phương thức thanh toán khả dụng
+Place Order,Đặt hàng
+My billing address is same as shipping address,Địa chỉ thanh toán của tôi giống với địa chỉ giao hàng
+${count} items,${count} mặt hàng
+Discount,Giảm giá
+Shipping,Giao hàng
+No tax,Không thuế
+Tax,Thuế
+Continue to payment,Tiếp tục tới thanh toán
+No payment method available,Không có phương thức thanh toán nào
+Ship to,Gửi đến
+Shipment,Lô hàng
+Thank you ${name}!, Cảm ơn ${name}!
+Contact information,Thông tin liên hệ
+Order #${orderNumber},Đơn hàng #${orderNumber}
+ADD TO CART,THÊM VÀO GIỎ HÀNG
+Please select variant options,Vui lòng chọn các tuỳ chọn biến thể
+VIEW CART (${count}),XEM GIỎ HÀNG (${count})
+JUST ADDED TO YOUR CART,ĐÃ THÊM VÀO GIỎ HÀNG
+Promotion code?,Mã khuyến mãi?
+Enter coupon code,Nhập mã phiếu giảm giá
+Apply,Áp dụng
+Your cart is empty!,Giỏ hàng của bạn đang trống!
+Full name,Họ và tên
+Telephone,Số điện thoại
+Address,Địa chỉ
+City,Thành phố
+Country,Quốc gia
+Postcode,Mã bưu điện
+Inclusive of tax ${totalTaxAmount},Đã bao gồm thuế ${totalTaxAmount}
+Full name is required,Cần nhập họ và tên
+Telephone is required,Cần nhập số điện thoại
+Address is required,Cần nhập địa chỉ
+City is required,Cần nhập thành phố
+Country is required,Cần nhập quốc gia
+Postcode is required,Cần nhập mã bưu điện
+Contact,Liên hệ
