@@ -117,7 +117,7 @@ Items.propTypes = {
       name: PropTypes.string
     }),
     shipment: PropTypes.shape({
-      shipmentId: PropTypes.string,
+      shipmentId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       carrier: PropTypes.string,
       trackingNumber: PropTypes.string,
       updateShipmentApi: PropTypes.string
