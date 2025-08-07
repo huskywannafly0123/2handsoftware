@@ -69,14 +69,14 @@ async function disableCart(cartId, connection) {
 async function saveOrder(cart, connection) {
   const shipmentStatusList = getConfig('oms.order.shipmentStatus', {});
   const paymentStatusList = getConfig('oms.order.paymentStatus', {});
-  let defaultShipmentStatus = null;
+  let defaultShipmentStatus = 'completed';
   Object.keys(shipmentStatusList).forEach((key) => {
     if (shipmentStatusList[key].isDefault) {
       defaultShipmentStatus = key;
     }
   });
 
-  let defaultPaymentStatus = null;
+  let defaultPaymentStatus = 'pending';
   Object.keys(paymentStatusList).forEach((key) => {
     if (paymentStatusList[key].isDefault) {
       defaultPaymentStatus = key;
