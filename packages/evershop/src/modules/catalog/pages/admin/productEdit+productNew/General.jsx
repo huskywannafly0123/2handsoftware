@@ -8,9 +8,9 @@ import Editor from '@components/common/form/fields/Editor';
 import { useModal } from '@components/common/modal/useModal';
 import CategorySelector from '@components/admin/promotion/couponEdit/CategorySelector';
 
-function SKUPriceWeight({ sku, price, weight, setting }) {
+function SKUPriceWeight({ sku, price, setting }) {
   return (
-    <div className="grid grid-cols-3 gap-4 mt-6">
+    <div className="grid grid-cols-2 gap-4 mt-6">
       <div>
         <Field
           id="sku"
@@ -34,18 +34,6 @@ function SKUPriceWeight({ sku, price, weight, setting }) {
           suffix={setting.storeCurrency}
         />
       </div>
-      <div>
-        <Field
-          id="weight"
-          name="weight"
-          value={weight?.value}
-          placeholder="Weight"
-          label="Weight"
-          type="text"
-          validationRules={['notEmpty']}
-          suffix={setting.weightUnit}
-        />
-      </div>
     </div>
   );
 }
@@ -55,12 +43,8 @@ SKUPriceWeight.propTypes = {
     value: PropTypes.number
   }),
   sku: PropTypes.string,
-  weight: PropTypes.shape({
-    value: PropTypes.number
-  }),
   setting: PropTypes.shape({
-    storeCurrency: PropTypes.string,
-    weightUnit: PropTypes.string
+    storeCurrency: PropTypes.string
   }).isRequired
 };
 
@@ -266,7 +250,6 @@ export default function General({
               props: {
                 sku: product?.sku,
                 price: product?.price.regular,
-                weight: product?.weight,
                 setting
               },
               sortOrder: 20,
@@ -364,15 +347,10 @@ General.propTypes = {
     }),
     productId: PropTypes.number,
     taxClass: PropTypes.number,
-    sku: PropTypes.string,
-    weight: PropTypes.shape({
-      unit: PropTypes.string,
-      value: PropTypes.number
-    })
+    sku: PropTypes.string
   }),
   setting: PropTypes.shape({
-    storeCurrency: PropTypes.string,
-    weightUnit: PropTypes.string
+    storeCurrency: PropTypes.string
   }).isRequired,
   productTaxClasses: PropTypes.shape({
     items: PropTypes.arrayOf(
@@ -410,10 +388,6 @@ export const query = `
           currency
         }
       }
-      weight {
-        value
-        unit
-      }
       category {
         categoryId
         path {
@@ -422,7 +396,6 @@ export const query = `
       }
     }
     setting {
-      weightUnit
       storeCurrency
     }
     browserApi: url(routeId: "fileBrowser", params: [{key: "0", value: ""}])

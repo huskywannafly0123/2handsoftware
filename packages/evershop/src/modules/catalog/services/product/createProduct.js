@@ -25,7 +25,6 @@ function validateProductDataBeforeInsert(data) {
     'url_key',
     'status',
     'sku',
-    'qty',
     'price',
     'group_id',
     'visibility'

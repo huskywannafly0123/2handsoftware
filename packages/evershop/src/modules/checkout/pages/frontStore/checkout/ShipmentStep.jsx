@@ -26,42 +26,27 @@ export default function ShipmentStep({
   const [display, setDisplay] = React.useState(false);
   const { canStepDisplay, addStep } = useCheckoutStepsDispatch();
 
-  React.useEffect(() => {
-    addStep({
-      id: 'shipment',
-      title: _('Shipment'),
-      previewTitle: _('Ship to'),
-      isCompleted: true,
-      preview: shippingAddress
-        ? `${shippingAddress.address1}, ${shippingAddress.city}, ${shippingAddress.country.name}`
-        : '',
-      sortOrder: 10,
-      editable: false
-    });
-  }, []);
+  // React.useEffect(() => {
+  //   addStep({
+  //     id: 'shipment',
+  //     title: _('Shipment'),
+  //     previewTitle: _('Ship to'),
+  //     isCompleted: true,
+  //     preview: shippingAddress
+  //       ? `${shippingAddress.address1}, ${shippingAddress.city}, ${shippingAddress.country.name}`
+  //       : '',
+  //     sortOrder: 10,
+  //     editable: false
+  //   });
+  // }, []);
 
   React.useEffect(() => {
     setDisplay(false);
   });
 
   
-  if (display === false) {
-    return null;
-  }
-
-  return (
-    <div className="checkout-payment checkout-step">
-      <StepContent
-        step={step}
-        shipmentInfo={shipmentInfo}
-        setShipmentInfo={setShipmentInfo}
-        addShippingAddressApi={addShippingAddressApi}
-        addShippingMethodApi={addShippingMethodApi}
-        customerAddressSchema={customerAddressSchema}
-        addresses={account?.addresses || []}
-      />
-    </div>
-  );
+  // Skip shipment step completely
+  return null;
 }
 
 ShipmentStep.propTypes = {
