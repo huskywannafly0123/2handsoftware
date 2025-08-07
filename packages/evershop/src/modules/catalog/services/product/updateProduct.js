@@ -326,7 +326,7 @@ async function updateProductData(uuid, data, connection) {
  * @param {Object} context
  */
 async function updateProduct(uuid, data, context) {
-  const {user} = req;
+  const {user} = context;
   const userId = user.user_id ? user.user_id : user.admin_user_id;
   const connection = await getConnection();
   await startTransaction(connection);

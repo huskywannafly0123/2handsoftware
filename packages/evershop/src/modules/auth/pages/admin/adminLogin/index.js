@@ -7,8 +7,12 @@ module.exports = (request, response, delegate, next) => {
   // Check if the user is logged in
   const user = request.getCurrentUser();
   if (user) {
+    if (user.role == 'admin')
     // Redirect to admin dashboard
     response.redirect(buildUrl('dashboard'));
+    else {
+      response.redirect(buildUrl('productGrid'));
+    }
   } else {
     setContextValue(request, 'pageInfo', {
       title: 'Admin Login',

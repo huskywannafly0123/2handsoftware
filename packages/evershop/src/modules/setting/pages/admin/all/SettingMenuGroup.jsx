@@ -3,7 +3,8 @@ import React from 'react';
 import CogIcon from '@heroicons/react/solid/esm/CogIcon';
 import NavigationItemGroup from '@components/admin/cms/NavigationItemGroup';
 
-export default function CmsMenuGroup({ storeSetting }) {
+export default function CmsMenuGroup({ storeSetting, user }) {
+  if (user && user.role == 'vendor') return (<div></div>)
   return (
     <NavigationItemGroup
       id="settingMenuGroup"
@@ -27,5 +28,9 @@ export const layout = {
 export const query = `
   query Query {
     storeSetting: url(routeId:"storeSetting")
+    user: currentAdminUser{
+      role
+      adminUserId
+    }
   }
 `;

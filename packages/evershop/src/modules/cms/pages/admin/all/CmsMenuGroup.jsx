@@ -4,7 +4,9 @@ import PageIcon from '@heroicons/react/solid/esm/DocumentIcon';
 import WidgetIcon from '@heroicons/react/solid/esm/PuzzleIcon';
 import NavigationItemGroup from '@components/admin/cms/NavigationItemGroup';
 
-export default function CmsMenuGroup({ cmsPageGrid, widgetGrid }) {
+export default function CmsMenuGroup({ cmsPageGrid, widgetGrid, user }) {
+  const isVendor = user && user.role == 'vendor';
+  if (isVendor) return <></>
   return (
     <NavigationItemGroup
       id="cmsMenuGroup"
@@ -27,7 +29,8 @@ export default function CmsMenuGroup({ cmsPageGrid, widgetGrid }) {
 
 CmsMenuGroup.propTypes = {
   cmsPageGrid: PropTypes.string.isRequired,
-  widgetGrid: PropTypes.string.isRequired
+  widgetGrid: PropTypes.string.isRequired,
+  user: PropTypes.any
 };
 
 export const layout = {
@@ -39,5 +42,9 @@ export const query = `
   query Query {
     cmsPageGrid: url(routeId:"cmsPageGrid")
     widgetGrid: url(routeId:"widgetGrid")
+    user: currentAdminUser{
+      role
+      adminUserId
+    }
   }
 `;

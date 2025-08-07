@@ -70,7 +70,7 @@ export function Setting({ discountAmount, startDate, endDate }) {
 }
 
 Setting.propTypes = {
-  discountAmount: PropTypes.number,
+  discountAmount: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   endDate: PropTypes.string,
   startDate: PropTypes.string
 };
