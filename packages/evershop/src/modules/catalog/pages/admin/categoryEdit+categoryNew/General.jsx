@@ -110,7 +110,7 @@ export default function General({
       props: {
         id: 'name',
         name: 'name',
-        label: 'Tên sản phẩm',
+        label: 'Tên danh mục',
         validationRules: ['notEmpty'],
         type: 'text'
       },

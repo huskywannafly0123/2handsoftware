@@ -30,7 +30,7 @@ export default function Attributes({ product, groups: { items } }) {
 
   return (
     <Card>
-      {/* <Card.Session title="Attribute group" subdued>
+      <Card.Session title="Attribute group" subdued>
         <div>
           {product?.variantGroupId && (
             <div>
@@ -62,7 +62,7 @@ export default function Attributes({ product, groups: { items } }) {
             />
           )}
         </div>
-      </Card.Session> */}
+      </Card.Session>
       <Card.Session title="Thuộc tính">
         <table className="table table-auto">
           <tbody>

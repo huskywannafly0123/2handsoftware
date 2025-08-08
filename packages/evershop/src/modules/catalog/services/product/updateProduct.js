@@ -351,7 +351,7 @@ async function updateProduct(uuid, data, context) {
     if (currentProduct.vendor_id != productData.vendor_id) {
       delete productData.vendor_id;
     }
-    if (user.role === 'admin' && product.vendor_id) {
+    if (user.role === 'admin' && currentProduct.vendor_id) {
       const allowedFields = ['status'];
       for (const field in productData) {
         if (!allowedFields.includes(field)) {

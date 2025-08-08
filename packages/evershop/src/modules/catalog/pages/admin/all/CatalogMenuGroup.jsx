@@ -13,6 +13,19 @@ export default function CatalogMenuGroup({
   collectionGrid,
   user
 }) {
+  if (user.role == 'vendor'){
+   return  <NavigationItemGroup
+      id="catalogMenuGroup"
+      name="Catalog"
+      items={[
+        {
+          Icon: ProductIcon,
+          url: productGrid,
+          title: 'Sản phẩm'
+        }
+      ]}
+    />
+  }
   return (
     <NavigationItemGroup
       id="catalogMenuGroup"
@@ -36,7 +49,7 @@ export default function CatalogMenuGroup({
         {
           Icon: AttributeIcon,
           url: attributeGrid,
-          title: 'Attributes'
+          title: 'Thuộc tính'
         }
       ]}
     />
