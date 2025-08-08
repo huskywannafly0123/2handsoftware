@@ -31,7 +31,7 @@ export default function SaleStatistic({ api }) {
 
   if (fetching) {
     return (
-      <Card title="Sale Statistics">
+      <Card title="Thống kê">
         <div className="skeleton-wrapper-statistic">
           <div className="skeleton" />
         </div>
@@ -40,18 +40,18 @@ export default function SaleStatistic({ api }) {
   } else {
     return (
       <Card
-        title="Sale Statistics"
+        title="Thống kê"
         actions={[
           {
-            name: 'Daily',
+            name: 'Theo ngày',
             onAction: () => setPeriod('daily')
           },
           {
-            name: 'Weekly',
+            name: 'Theo tuần',
             onAction: () => setPeriod('weekly')
           },
           {
-            name: 'Monthly',
+            name: 'Theo tháng',
             onAction: () => setPeriod('monthly')
           }
         ]}

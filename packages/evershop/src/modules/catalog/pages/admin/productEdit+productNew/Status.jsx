@@ -5,7 +5,7 @@ import { Card } from '@components/admin/cms/Card';
 
 export default function Status({ product }) {
   return (
-    <Card title="Product status" subdued>
+    <Card title="Trạng thái sản phẩm" subdued>
       <Card.Session>
         <Field
           id="status"
@@ -13,8 +13,8 @@ export default function Status({ product }) {
           value={product?.status === undefined ? 1 : product.status}
           label="Status"
           options={[
-            { value: 0, text: 'Disabled' },
-            { value: 1, text: 'Enabled' }
+            { value: 0, text: 'Ngừng hoạt động' },
+            { value: 1, text: 'Đang hoạt động' }
           ]}
           type="radio"
         />
@@ -24,10 +24,10 @@ export default function Status({ product }) {
           id="visibility"
           name="visibility"
           value={product?.visibility === undefined ? 1 : product.visibility}
-          label="Visibility"
+          label="Hiển thị"
           options={[
-            { value: 0, text: 'Not visible' },
-            { value: 1, text: 'Visible' }
+            { value: 0, text: 'Ẩn' },
+            { value: 1, text: 'Hiện' }
           ]}
           type="radio"
         />

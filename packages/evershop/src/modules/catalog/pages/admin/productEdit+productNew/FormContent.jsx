@@ -19,7 +19,7 @@ export default function FormContent({ gridUrl }) {
       </div>
       <div className="form-submit-button flex border-t border-divider mt-6 pt-6 justify-between">
         <Button
-          title="Cancel"
+          title="Hủy"
           variant="critical"
           outline
           onAction={() => {
@@ -27,7 +27,7 @@ export default function FormContent({ gridUrl }) {
           }}
         />
         <Button
-          title="Save"
+          title="Lưu"
           onAction={() => {
             document
               .getElementById('productForm')

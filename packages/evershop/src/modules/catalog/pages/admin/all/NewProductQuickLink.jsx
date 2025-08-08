@@ -4,7 +4,7 @@ import Icon from '@heroicons/react/solid/esm/ArchiveIcon';
 import NavigationItem from '@components/admin/cms/NavigationItem';
 
 export default function NewProductQuickLink({ productNew }) {
-  return <NavigationItem Icon={Icon} title="New Product" url={productNew} />;
+  return <NavigationItem Icon={Icon} title="Tạo sản phẩm" url={productNew} />;
 }
 
 NewProductQuickLink.propTypes = {

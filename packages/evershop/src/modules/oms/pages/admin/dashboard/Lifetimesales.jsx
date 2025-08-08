@@ -62,27 +62,27 @@ export default function LifetimeSale({ api }) {
     );
   } else {
     return (
-      <Card title="Lifetime Sales">
+      <Card title="Tổng doanh thu">
         <Card.Session>
           <div className="grid grid-cols-1 gap-4">
             <div className="flex space-x-4 items-center">
               <Dot variant="info" />
-              <div className="self-center">{orders} orders</div>
+              <div className="self-center">{orders} đơn hàng</div>
             </div>
             <div className="flex space-x-4 items-center">
               <Dot variant="info" />
-              <div className="self-center">{total} lifetime sale</div>
+              <div className="self-center">{total} tổng doanh thu</div>
             </div>
             <div className="flex space-x-4 items-center">
               <Dot variant="success" />
               <div className="self-center">
-                {completed_percentage}% of orders completed
+                {completed_percentage}% đơn hàng hoàn tất
               </div>
             </div>
             <div className="flex space-x-4 items-center">
               <Dot variant="critical" />
               <div className="self-center">
-                {cancelled_percentage}% of orders cancelled
+                {cancelled_percentage}% đơn hàng bị hủy
               </div>
             </div>
           </div>

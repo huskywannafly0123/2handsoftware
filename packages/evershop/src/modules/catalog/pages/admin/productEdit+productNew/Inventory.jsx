@@ -6,22 +6,22 @@ import { Card } from '@components/admin/cms/Card';
 export default function Inventory({ product }) {
   const inventory = product?.inventory || {};
   return (
-    <Card title="Inventory" subdued>
-      <Card.Session>
+    <Card title="Kho hàng" subdued>
+      {/* <Card.Session>
         <Field
           id="manage_stock"
           name="manage_stock"
           value={
             inventory.manageStock === undefined ? 1 : inventory.manageStock
           }
-          label="Manage stock?"
+          label="Quản lý kho?"
           options={[
             { value: 0, text: 'No' },
             { value: 1, text: 'Yes' }
           ]}
           type="radio"
         />
-      </Card.Session>
+      </Card.Session> */}
       <Card.Session>
         <Field
           id="stock_availability"
@@ -31,10 +31,10 @@ export default function Inventory({ product }) {
               ? 1
               : inventory.stockAvailability
           }
-          label="Stock availability"
+          label="Tồn kho"
           options={[
-            { value: 0, text: 'No' },
-            { value: 1, text: 'Yes' }
+            { value: 0, text: 'Hết hàng' },
+            { value: 1, text: 'Sẵn hàng' }
           ]}
           type="radio"
         />
@@ -45,7 +45,7 @@ export default function Inventory({ product }) {
           name="qty"
           value={inventory.qty}
           placeholder="Quantity"
-          label="Quantity"
+          label="Số lượng"
           type="text"
         />
       </Card.Session>

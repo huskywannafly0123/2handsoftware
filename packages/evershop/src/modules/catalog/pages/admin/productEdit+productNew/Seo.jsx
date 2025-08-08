@@ -12,7 +12,7 @@ export default function SEO({ product }) {
       props: {
         id: 'urlKey',
         name: 'url_key',
-        label: 'Url key',
+        label: 'Url',
         validationRules: ['notEmpty'],
         type: 'text'
       },

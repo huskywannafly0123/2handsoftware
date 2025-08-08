@@ -6,10 +6,10 @@ import './Bestsellers.scss';
 export default function BestSellers({ bestSellers, listUrl }) {
   return (
     <Card
-      title="Best Sellers"
+      title="Bán chạy"
       actions={[
         {
-          name: 'All products',
+          name: 'Xem tất cả',
           onAction: () => {
             window.location.href = listUrl;
           }
@@ -75,7 +75,7 @@ export default function BestSellers({ bestSellers, listUrl }) {
                 </td>
                 <td />
                 <td>{p.price.regular.text}</td>
-                <td>{p.soldQty} sold</td>
+                <td>{p.soldQty} đã bán</td>
               </tr>
             ))}
           </tbody>

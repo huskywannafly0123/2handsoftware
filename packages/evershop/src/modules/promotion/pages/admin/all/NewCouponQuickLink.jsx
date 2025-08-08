@@ -4,7 +4,7 @@ import Icon from '@heroicons/react/solid/esm/GiftIcon';
 import NavigationItem from '@components/admin/cms/NavigationItem';
 
 export default function NewProductQuickLink({ couponNew }) {
-  return <NavigationItem Icon={Icon} title="New Coupon" url={couponNew} />;
+  return <NavigationItem Icon={Icon} title="Tạo mã giảm giá" url={couponNew} />;
 }
 
 NewProductQuickLink.propTypes = {

@@ -75,7 +75,7 @@ function CategorySelector({ onSelect, onUnSelect, selectedIDs, closeModal }) {
   }
 
   return (
-    <Card title="Select categories">
+    <Card title="Chọn danh mục">
       <div className="modal-content">
         <Card.Session>
           <div>
@@ -83,7 +83,7 @@ function CategorySelector({ onSelect, onUnSelect, selectedIDs, closeModal }) {
               <input
                 type="text"
                 value={inputValue || ''}
-                placeholder="Search categories"
+                placeholder="Tìm danh mục"
                 onChange={(e) => setInputValue(e.target.value)}
               />
             </div>
@@ -98,10 +98,10 @@ function CategorySelector({ onSelect, onUnSelect, selectedIDs, closeModal }) {
                   <div className="p-3 border border-divider rounded flex justify-center items-center">
                     {inputValue ? (
                       <p>
-                        No categories found for query &quot;{inputValue}&rdquo;
+                        Không tim thấy danh mục tương ứng với &quot;{inputValue}&rdquo;
                       </p>
                     ) : (
-                      <p>You have no categories to display</p>
+                      <p>Chưa có danh mục nào</p>
                     )}
                   </div>
                 )}
@@ -130,7 +130,7 @@ function CategorySelector({ onSelect, onUnSelect, selectedIDs, closeModal }) {
                             onSelect(cat.categoryId);
                           }}
                         >
-                          Select
+                          Chọn
                         </button>
                       )}
                       {selectedIDs.includes(cat.categoryId) && (
@@ -162,7 +162,7 @@ function CategorySelector({ onSelect, onUnSelect, selectedIDs, closeModal }) {
             hasNext={limit * page < data?.categories.total}
             setPage={setPage}
           />
-          <Button title="Close" variant="secondary" onAction={closeModal} />
+          <Button title="Đóng" variant="secondary" onAction={closeModal} />
         </div>
       </Card.Session>
     </Card>

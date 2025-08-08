@@ -27,8 +27,8 @@ function SKUPriceWeight({ sku, price, setting }) {
           id="price"
           name="price"
           value={price?.value}
-          placeholder="Price"
-          label="Price"
+          placeholder="Giá bán"
+          label="Giá bán"
           type="text"
           validationRules={['notEmpty']}
           suffix={setting.storeCurrency}
@@ -76,7 +76,7 @@ function ProductCategory({ categoryId, onChange, onUnassign }) {
   if (error) {
     return (
       <p className="text-critical">
-        There was an error fetching categories.
+        Đã xảy ra lỗi.
         {error.message}
       </p>
     );
@@ -100,7 +100,7 @@ function ProductCategory({ categoryId, onChange, onUnassign }) {
             onChange();
           }}
         >
-          Change
+          Đổi
         </a>
         <a
           href="#"
@@ -110,7 +110,7 @@ function ProductCategory({ categoryId, onChange, onUnassign }) {
           }}
           className="text-critical ml-8"
         >
-          Unassign
+          Xóa
         </a>
       </span>
     </div>
@@ -139,7 +139,7 @@ function CategorySelect({ product }) {
   };
   return (
     <div className="mt-6 relative">
-      <div className="mb-4">Category</div>
+      <div className="mb-4">Danh mục</div>
       {category && (
         <div className="border rounded border-[#c9cccf] mb-4 p-4">
           <ProductCategory
@@ -158,7 +158,7 @@ function CategorySelect({ product }) {
           }}
           className="text-interactive"
         >
-          Select category
+          Chọn danh mục
         </a>
       )}
       {modal.state.showing && (
@@ -225,7 +225,7 @@ export default function General({
               props: {
                 id: 'name',
                 name: 'name',
-                label: 'Name',
+                label: 'Tên sản phẩm',
                 value: product?.name,
                 validationRules: ['notEmpty'],
                 type: 'text',
@@ -260,7 +260,7 @@ export default function General({
               props: {
                 id: 'product_type',
                 name: 'product_type',
-                label: 'Product Type',
+                label: 'Loại sản phẩm',
                 type: 'select',
                 options: [
                   { value: 'email', text: 'Email' },
@@ -281,27 +281,27 @@ export default function General({
               sortOrder: 22,
               id: 'category'
             },
-            {
-              component: { default: Field },
-              props: {
-                id: 'tax_class',
-                name: 'tax_class',
-                value: product?.taxClass || '',
-                type: 'select',
-                label: 'Tax class',
-                options: [...taxClasses],
-                placeholder: 'None',
-                disableDefaultOption: false
-              },
-              sortOrder: 25,
-              id: 'tax_class'
-            },
+            // {
+            //   component: { default: Field },
+            //   props: {
+            //     id: 'tax_class',
+            //     name: 'tax_class',
+            //     value: product?.taxClass || '',
+            //     type: 'select',
+            //     label: 'Tax class',
+            //     options: [...taxClasses],
+            //     placeholder: 'None',
+            //     disableDefaultOption: false
+            //   },
+            //   sortOrder: 25,
+            //   id: 'tax_class'
+            // },
             {
               component: { default: Editor },
               props: {
                 id: 'description',
                 name: 'description',
-                label: 'Description',
+                label: 'Mô tả chi tiết',
                 value: product?.description,
                 browserApi,
                 deleteApi,
