@@ -24,8 +24,8 @@ function CartSummary({
         count={totalQty}
         total={priceIncludingTax ? subTotalInclTax.text : subTotal.text}
       />
-      <Shipping method={shippingMethodName} cost={shippingFeeInclTax.text} />
-      {!priceIncludingTax && <Tax amount={totalTaxAmount.text} />}
+      {/* <Shipping method={shippingMethodName} cost={shippingFeeInclTax.text} /> */}
+      {/* {!priceIncludingTax && <Tax amount={totalTaxAmount.text} />} */}
       <Discount code={coupon} discount={discountAmount.text} />
       <Total
         totalTaxAmount={totalTaxAmount.text}

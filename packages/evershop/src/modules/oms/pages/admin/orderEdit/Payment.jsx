@@ -55,24 +55,24 @@ export default function OrderSummary({
               props: { count: totalQty, total: subTotal.text },
               sortOrder: 5
             },
-            {
-              component: { default: Shipping },
-              props: {
-                method: shippingMethodName,
-                cost: shippingFeeInclTax.text
-              },
-              sortOrder: 10
-            },
+            // {
+            //   component: { default: Shipping },
+            //   props: {
+            //     method: shippingMethodName,
+            //     cost: shippingFeeInclTax.text
+            //   },
+            //   sortOrder: 10
+            // },
             {
               component: { default: Discount },
               props: { code: coupon, discount: discountAmount.text },
               sortOrder: 15
             },
-            {
-              component: { default: Tax },
-              props: { taxClass: '', amount: totalTaxAmount.text },
-              sortOrder: 20
-            },
+            // {
+            //   component: { default: Tax },
+            //   props: { taxClass: '', amount: totalTaxAmount.text },
+            //   sortOrder: 20
+            // },
 
             {
               component: { default: Total },

@@ -138,8 +138,9 @@ module.exports = async (request, response, delegate, next) => {
             admin_area_1: 'No shipping address',
             admin_area_2: 'No shipping address',
             postal_code: 'No shipping address',
-            country_code: 'No shipping address'
-          }
+            country_code: "VN"
+          },
+          email: order.customer_email,
         };
       }
 

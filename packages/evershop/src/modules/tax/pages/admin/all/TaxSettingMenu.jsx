@@ -14,10 +14,10 @@ TaxSettingMenu.propTypes = {
   taxSettingUrl: PropTypes.string.isRequired
 };
 
-export const layout = {
-  areaId: 'settingPageMenu',
-  sortOrder: 20
-};
+// export const layout = {
+//   areaId: 'settingPageMenu',
+//   sortOrder: 20
+// };
 
 export const query = `
   query Query {

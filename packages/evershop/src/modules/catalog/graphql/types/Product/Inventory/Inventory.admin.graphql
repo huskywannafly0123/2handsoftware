@@ -1,3 +1,10 @@
 extend type Inventory {
   qty: Int!
+  accounts: [Account]
+}
+
+type Account {
+  username: String
+  status: String
+  sold_at: String 
 }

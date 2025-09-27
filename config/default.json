@@ -12,11 +12,18 @@
                 "resolve": "extensions/vendor_role",
                 "enabled": true,
                 "priority": 5
+            },
+            {
+                "name": "product_review",
+                "resolve": "packages/product_review",
+                "enabled": true,
+                "priority": 10
             }
-        ]
+        ],
+        "theme": "eve"
     },
     "shop": {
         "currency": "VND",
-        "language": "vi"
+        "language": "en"
     }
 }

@@ -14,10 +14,10 @@ ShippingSettingMenu.propTypes = {
   shippingSettingUrl: PropTypes.string.isRequired
 };
 
-export const layout = {
-  areaId: 'settingPageMenu',
-  sortOrder: 15
-};
+// export const layout = {
+//   areaId: 'settingPageMenu',
+//   sortOrder: 15
+// };
 
 export const query = `
   query Query {

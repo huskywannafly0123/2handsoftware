@@ -326,7 +326,7 @@ export default function StoreSetting({
                   className="grid grid-cols-2 gap-8 mt-8"
                 />
               </Card.Session>
-              <Card.Session title="Address">
+              {/* <Card.Session title="Address">
                 <Country
                   selectedCountry={storeCountry}
                   setSelectedCountry={setSelectedCountry}
@@ -362,7 +362,7 @@ export default function StoreSetting({
                     />
                   </div>
                 </div>
-              </Card.Session>
+              </Card.Session> */}
             </Card>
           </Form>
         </div>

@@ -5,7 +5,7 @@ import Dot from '@components/common/Dot';
 export default function IsApprovedRow({ approved = false }) {
   return (
     <td>
-      <div className="flex justify-center">
+      <div className="flex">
         {approved === false && <Dot variant="default" size="1.2rem" />}
         {approved === true && <Dot variant="success" size="1.2rem" />}
       </div>

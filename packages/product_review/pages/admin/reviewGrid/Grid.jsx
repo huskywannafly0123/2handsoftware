@@ -129,7 +129,7 @@ function Actions({ reviews = [], selectedIds = [] }) {
       {selectedIds.length > 0 && (
         <td style={{ borderTop: 0 }} colSpan="100">
           <div className="inline-flex border border-divider rounded justify-items-start">
-            <a href="#" className="font-semibold pt-075 pb-075 pl-15 pr-15">
+            <a href="#" className="font-semibold pt-3 pb-3 pl-6 pr-6">
               {selectedIds.length} selected
             </a>
             {actions.map((action) => (
@@ -139,7 +139,7 @@ function Actions({ reviews = [], selectedIds = [] }) {
                   e.preventDefault();
                   action.onAction();
                 }}
-                className="font-semibold pt-075 pb-075 pl-15 pr-15 block border-l border-divider self-center"
+                className="font-semibold pt-3 pb-3 pl-6 pr-6 block border-l border-divider self-center"
               >
                 <span>{action.name}</span>
               </a>
@@ -178,7 +178,7 @@ export default function ReviewGrid({
     <Card>
       <Card.Session
         title={
-          <Form submitBtn={false}>
+          <Form submitBtn={false} id="productReviewGridFilterForm">
             <Area
               id="productReviewGridFilter"
               noOuter
@@ -189,6 +189,7 @@ export default function ReviewGrid({
                       <Field
                         type="text"
                         id="keyword"
+                        name="keyword"
                         placeholder="Search"
                         value={
                           currentFilters.find((f) => f.key === 'keyword')?.value
@@ -306,11 +307,11 @@ export default function ReviewGrid({
           </tr>
         </thead>
         <tbody>
-          <Actions
+          {selectedRows.length > 0 && <Actions
             reviews={reviews}
             selectedIds={selectedRows}
             setSelectedRows={setSelectedRows}
-          />
+          />}
           {reviews.map((r, i) => (
             // eslint-disable-next-line react/no-array-index-key
             <tr key={i}>

@@ -144,7 +144,7 @@ export default function Image({ product }) {
     //   });
   
 
-  return (
+  return ( <>
     <Card
       title="Upload file(txt)"
     >
@@ -228,7 +228,15 @@ export default function Image({ product }) {
           )}
         </div>
       </Card.Session>
+    {sendData.length > 0 && <div className="text-base text-neutral-900 px-5 py-4">Uploaded {sendData.length} item{sendData.length > 1 ? 's' : ''}
+      <ul>
+        {sendData.map((item, index) => (
+          <li key={index}>{item.username}</li>
+        ))}
+      </ul>
+    </div>}
     </Card>
+    </>
   );
 }
 

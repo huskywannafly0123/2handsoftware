@@ -281,21 +281,21 @@ export default function General({
               sortOrder: 22,
               id: 'category'
             },
-            {
-              component: { default: Field },
-              props: {
-                id: 'tax_class',
-                name: 'tax_class',
-                value: product?.taxClass || '',
-                type: 'select',
-                label: 'Tax class',
-                options: [...taxClasses],
-                placeholder: 'None',
-                disableDefaultOption: false
-              },
-              sortOrder: 25,
-              id: 'tax_class'
-            },
+            // {
+            //   component: { default: Field },
+            //   props: {
+            //     id: 'tax_class',
+            //     name: 'tax_class',
+            //     value: product?.taxClass || '',
+            //     type: 'select',
+            //     label: 'Tax class',
+            //     options: [...taxClasses],
+            //     placeholder: 'None',
+            //     disableDefaultOption: false
+            //   },
+            //   sortOrder: 25,
+            //   id: 'tax_class'
+            // },
             {
               component: { default: Editor },
               props: {
