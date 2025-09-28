@@ -9,7 +9,6 @@ import { useAlertContext } from '@components/common/modal/Alert';
 import { Card } from '@components/admin/cms/Card';
 import OrderNumberRow from '@components/admin/oms/orderGrid/rows/OrderNumberRow';
 import BasicRow from '@components/common/grid/rows/BasicRow';
-import ShipmentStatusRow from '@components/admin/oms/orderGrid/rows/ShipmentStatus';
 import PaymentStatusRow from '@components/admin/oms/orderGrid/rows/PaymentStatus';
 import TotalRow from '@components/admin/oms/orderGrid/rows/TotalRow';
 import CreateAt from '@components/admin/customer/customerGrid/rows/CreateAt';
@@ -106,8 +105,7 @@ Actions.propTypes = {
 
 export default function OrderGrid({
   orders: { items: orders, total, currentFilters = [] },
-  paymentStatusList,
-  shipmentStatusList
+  paymentStatusList
 }) {
   const page = currentFilters.find((filter) => filter.key === 'page')
     ? parseInt(currentFilters.find((filter) => filter.key === 'page').value, 10)
@@ -442,12 +440,6 @@ OrderGrid.propTypes = {
           text: PropTypes.string.isRequired
         }).isRequired,
         customerEmail: PropTypes.string.isRequired,
-        shipmentStatus: PropTypes.shape({
-          name: PropTypes.string.isRequired,
-          code: PropTypes.string.isRequired,
-          badge: PropTypes.string.isRequired,
-          progress: PropTypes.string.isRequired
-        }).isRequired,
         paymentStatus: PropTypes.shape({
           name: PropTypes.string.isRequired,
           code: PropTypes.string.isRequired,
@@ -477,12 +469,6 @@ OrderGrid.propTypes = {
       name: PropTypes.string.isRequired
     })
   ).isRequired,
-  shipmentStatusList: PropTypes.arrayOf(
-    PropTypes.shape({
-      code: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired
-    })
-  ).isRequired
 };
 
 export const layout = {
@@ -502,12 +488,6 @@ export const query = `
           text
         }
         customerEmail
-        shipmentStatus {
-          name
-          code
-          badge
-          progress
-        }
         paymentStatus {
           name
           code
@@ -529,10 +509,6 @@ export const query = `
       }
     }
     paymentStatusList {
-      code
-      name
-    }
-    shipmentStatusList {
       code
       name
     }

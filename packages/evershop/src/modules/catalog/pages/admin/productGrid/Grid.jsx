@@ -251,42 +251,6 @@ export default function ProductGrid({
                       )
                     },
                     sortOrder: 10
-                  },
-                  {
-                    component: {
-                      default: () => (
-                        <Filter
-                          options={[
-                            {
-                              label: 'Simple',
-                              value: '1',
-                              onSelect: () => {
-                                const url = new URL(document.location);
-                                url.searchParams.set('type', 'simple');
-                                window.location.href = url;
-                              }
-                            },
-                            {
-                              label: 'Configurable',
-                              value: '0',
-                              onSelect: () => {
-                                const url = new URL(document.location);
-                                url.searchParams.set('type', 'configurable');
-                                window.location.href = url;
-                              }
-                            }
-                          ]}
-                          selectedOption={
-                            currentFilters.find((f) => f.key === 'type')
-                              ? currentFilters.find((f) => f.key === 'type')
-                                  .value
-                              : undefined
-                          }
-                          title="Product type"
-                        />
-                      )
-                    },
-                    sortOrder: 15
                   }
                 ]}
                 currentFilters={currentFilters}

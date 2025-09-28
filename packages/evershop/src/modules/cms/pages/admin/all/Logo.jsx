@@ -72,7 +72,7 @@ export default function Logo({
               </linearGradient>
             </defs>
           </svg>
-          <span className="font-bold">EVERSHOP</span>
+          <span className="font-bold">2handsoftware</span>
         </a>
       )}
     </div>
