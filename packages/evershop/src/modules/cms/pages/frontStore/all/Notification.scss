@@ -530,3 +530,43 @@
 .Toastify__slide-exit--bottom-center {
   animation-name: Toastify__slideOutDown;
 }
+
+.Toastify__toast {
+  background: rgba(27, 35, 50, 0.92);
+  border: 1px solid var(--border);
+  color: var(--onSurface);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 18px 40px rgba(6, 10, 16, 0.45);
+}
+
+.Toastify__toast--success {
+  background: var(--success);
+  color: var(--onSurface);
+}
+
+.Toastify__toast--error {
+  background: var(--critical);
+  color: var(--onSurface);
+}
+
+.Toastify__toast--info {
+  background: var(--interactive);
+  color: var(--background);
+}
+
+.Toastify__toast--warning {
+  background: var(--warning);
+  color: var(--background);
+}
+
+.Toastify__close-button {
+  color: var(--onSurface);
+}
+
+:root[data-theme='light'] {
+  .Toastify__toast {
+    background: rgba(255, 255, 255, 0.96);
+    color: var(--text);
+    box-shadow: 0 18px 35px rgba(15, 23, 42, 0.18);
+  }
+}

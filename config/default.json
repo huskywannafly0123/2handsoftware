@@ -18,6 +18,12 @@
                 "resolve": "packages/product_review",
                 "enabled": true,
                 "priority": 10
+            },
+            {
+                "name": "tawk_widget",
+                "resolve": "node_modules/evershop_tawk_widget",
+                "enabled": true,
+                "priority": 20
             }
         ],
         "theme": "eve"

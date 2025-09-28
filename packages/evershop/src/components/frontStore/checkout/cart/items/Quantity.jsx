@@ -54,7 +54,7 @@ export default function Quantity({ qty, api }) {
   };
 
   return (
-    <div className="qty-box grid grid-cols-3 border border-[#ccc]">
+    <div className="qty-box grid grid-cols-3">
       <button
         className="flex justify-center items-center"
         onClick={() => updateQuantity(Math.max(quantity - 1, 0))}

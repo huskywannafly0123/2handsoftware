@@ -1,67 +1,97 @@
 .button {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
   position: relative;
-  border: 1px solid rgba(186, 191, 195, 1);
-  border-radius: 3px;
-  padding: 0.5rem 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.9rem 2rem;
   font-weight: 600;
-  color: inherit;
-  background-color: white;
-  border-top-color: rgba(201, 204, 207, 1);
-  border-bottom-color: rgba(186, 191, 196, 1);
-  &:hover {
-    text-decoration: none;
-    background-color: rgba(201, 204, 207, 0.05);
+  font-size: 1.4rem;
+  letter-spacing: 0.05em;
+  color: var(--onSurface);
+  background: rgba(27, 35, 50, 0.82);
+  box-shadow: 0 12px 28px rgba(6, 10, 16, 0.3);
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+  text-decoration: none;
+
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 40px rgba(6, 10, 16, 0.38);
   }
+
   &.primary {
-    background-color: var(--primary);
-    border: 0;
-    color: white;
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05), inset 0 -1px 0 rgba(0, 0, 0, 0.2);
-    &:hover {
-      background-color: #606060;
+    background: linear-gradient(135deg, var(--primary), var(--interactive));
+    border: none;
+    color: var(--onSurface);
+
+    &:hover,
+    &:focus-visible {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 45px rgba(6, 10, 16, 0.45);
     }
   }
+
   &.critical {
-    background-color: var(--critical);
-    border: 0;
-    color: white;
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05), inset 0 -1px 0 rgba(0, 0, 0, 0.2);
-    &:hover {
-      background-color: #bc2200;
-    }
+    background: linear-gradient(135deg, var(--critical), #b91c1c);
+    border: none;
+    color: var(--onSurface);
   }
-  &.outline.interactive {
-    border-color: var(--interactive);
-    color: var(--interactive);
-    &:hover {
-      background-color: rgba(var(--interactive), 0.05);
-    }
-  }
-  &.outline.critical {
-    background-color: transparent;
+
+  &.outline {
+    background: transparent;
     box-shadow: none;
-    border: 1px solid;
-    border-color: var(--critical);
-    color: var(--critical);
-    &:hover {
-      background-color: #fff4f4;
+
+    &.interactive {
+      border-color: var(--interactive);
+      color: var(--interactive);
+
+      &:hover,
+      &:focus-visible {
+        background: rgba(56, 189, 248, 0.1);
+      }
+    }
+
+    &.critical {
+      border-color: var(--critical);
+      color: var(--critical);
+
+      &:hover,
+      &:focus-visible {
+        background: rgba(248, 113, 113, 0.12);
+      }
     }
   }
+
   &.loading {
-    background-color: var(--divider);
-    &:hover {
-      background-color: var(--divider);
+    background: var(--divider);
+    border-color: transparent;
+
+    &:hover,
+    &:focus-visible {
+      background: var(--divider);
+      transform: none;
+      box-shadow: none;
     }
+
     span {
       opacity: 0;
     }
+
     svg {
       position: absolute;
       top: 50%;
       left: 50%;
-      margin-top: -1rem;
-      margin-left: -1rem;
+      transform: translate(-50%, -50%);
     }
+  }
+}
+
+:root[data-theme='light'] {
+  .button {
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
   }
 }

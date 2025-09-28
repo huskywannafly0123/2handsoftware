@@ -1,22 +1,77 @@
+$dark-theme-vars: (
+  '--primary': #8b5cf6,
+  '--secondary': #38bdf8,
+  '--surface': #1f2933,
+  '--onSurface': #f1f5f9,
+  '--interactive': #38bdf8,
+  '--critical': #f87171,
+  '--warning': #fbbf24,
+  '--highlight': #22d3ee,
+  '--success': #34d399,
+  '--decorative': #f472b6,
+  '--border': #2a3140,
+  '--background': #0b101a,
+  '--icon': #e2e8f0,
+  '--textSubdued': #94a3b8,
+  '--divider': #242b38,
+  '--text': #f8fafc,
+  '--formFieldBorder': #2f3545,
+  '--formFieldBorderShadow': #0b101a,
+  '--fieldBackground': rgba(20, 28, 40, 0.85),
+  '--fieldBackgroundFocus': rgba(31, 44, 63, 0.95),
+  '--fieldBackgroundDisabled': rgba(17, 24, 33, 0.6)
+);
+
+$light-theme-vars: (
+  '--primary': #1f2933,
+  '--secondary': #0f172a,
+  '--surface': #ffffff,
+  '--onSurface': #0f172a,
+  '--interactive': #2563eb,
+  '--critical': #dc2626,
+  '--warning': #f59e0b,
+  '--highlight': #3b82f6,
+  '--success': #16a34a,
+  '--decorative': #6366f1,
+  '--border': #d1d5db,
+  '--background': #f8fafc,
+  '--icon': #4b5563,
+  '--textSubdued': #6b7280,
+  '--divider': #e2e8f0,
+  '--text': #111827,
+  '--formFieldBorder': #cbd5f5,
+  '--formFieldBorderShadow': #eaedf5,
+  '--fieldBackground': rgba(255, 255, 255, 0.96),
+  '--fieldBackgroundFocus': rgba(255, 255, 255, 1),
+  '--fieldBackgroundDisabled': rgba(241, 245, 249, 0.92)
+);
+
+@mixin apply-theme($vars) {
+  @each $property, $value in $vars {
+    #{$property}: #{$value};
+  }
+}
+
 :root {
-  --primary: #3a3a3a;
-  --secondary: #111213;
-  --surface: #111213;
-  --onSurface: #111213;
-  --interactive: #2c6ecb;
-  --critical: #d72c0d;
-  --warning: #ffc453;
-  --highlight: #5bcdda;
-  --success: #008060;
-  --decorative: #ffc96b;
-  --border: #8c9196;
-  --background: #f6f6f7fc;
-  --icon: #5c5f62;
-  --textSubdued: #6d7175;
-  --divider: #e1e3e5;
-  --text: #202223;
-  --formFieldBorder: #c9cccf;
-  --formFieldBorderShadow: #aeb4b9;
+  color-scheme: dark;
+  @include apply-theme($dark-theme-vars);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  @include apply-theme($dark-theme-vars);
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  @include apply-theme($light-theme-vars);
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme='dark']) {
+    color-scheme: light;
+    @include apply-theme($light-theme-vars);
+  }
 }
 
 $font-size-sm: 1.4rem;
@@ -45,6 +100,30 @@ html {
   select,
   textarea {
     padding: 1rem 1.2rem;
+    background-color: var(--fieldBackground);
+    border: 1px solid var(--formFieldBorder);
+    border-radius: 12px;
+    color: var(--text);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+
+    &::placeholder {
+      color: var(--textSubdued);
+      opacity: 0.8;
+    }
+
+    &:focus {
+      border-color: var(--interactive);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
+      outline: none;
+      background-color: var(--fieldBackgroundFocus);
+    }
+
+    &:disabled,
+    &[disabled] {
+      background-color: var(--fieldBackgroundDisabled);
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
   }
 
   .button {
@@ -54,7 +133,11 @@ html {
   }
 }
 body {
-  color: #3a3a3a;
+  color: var(--text);
+  background-color: var(--background);
+  background-image: radial-gradient(circle at top left, rgba(139, 92, 246, 0.22), transparent 55%),
+    radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.18), transparent 60%);
+  background-attachment: fixed;
 }
 p {
   margin-bottom: 1rem;
@@ -181,11 +264,18 @@ h6 {
 }
 .header {
   padding: 2.5rem;
-  border-bottom: 1px solid #ebebeb;
+  border-bottom: 1px solid var(--divider);
   margin-bottom: 3rem;
+  background-color: rgba(11, 16, 26, 0.8);
+  backdrop-filter: blur(18px);
   @media only screen and (min-width: 1200px) {
     padding-left: 50px;
     padding-right: 50px;
+  }
+
+  textarea {
+    min-height: 12rem;
+    resize: vertical;
   }
 }
 
@@ -202,11 +292,12 @@ h6 {
 }
 
 .footer {
-  background-color: #f6f6f6;
+  background-color: rgba(31, 41, 51, 0.85);
   margin-top: 9rem;
   padding-top: 1rem;
   padding-block-end: 1rem;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid var(--divider);
+  backdrop-filter: blur(14px);
   .card-icons {
     svg {
       height: 4rem;
@@ -219,11 +310,16 @@ h6 {
 table {
   width: 100%;
   border-collapse: collapse;
+  background-color: rgba(27, 35, 50, 0.7);
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+  overflow: hidden;
   td,
   th {
     border: 1px solid var(--divider);
     padding: 0.5rem;
     text-align: left;
+    color: var(--text);
   }
   th {
     vertical-align: top;
@@ -258,4 +354,15 @@ button.outline {
 }
 html .prose {
   font-size: 100%;
+}
+
+:root[data-theme='light'] {
+  body {
+    background-image: radial-gradient(circle at top left, rgba(37, 99, 235, 0.2), transparent 55%),
+      radial-gradient(circle at bottom right, rgba(125, 211, 252, 0.2), transparent 60%);
+  }
+  .header,
+  .footer {
+    background-color: rgba(255, 255, 255, 0.85);
+  }
 }

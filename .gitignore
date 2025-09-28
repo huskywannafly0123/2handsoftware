@@ -1,7 +1,7 @@
 node_modules
 .env
 ./dist
-themes
+packages/create-evershop-app/sample
 .idea/*
 .evershop
 .vscode
@@ -16,3 +16,4 @@ cypress
 .prettierignore
 .prettierrc
 mysqlToPostgres.js
+packages/evershop/src/lib/componee

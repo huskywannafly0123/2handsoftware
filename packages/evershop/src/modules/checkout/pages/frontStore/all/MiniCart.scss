@@ -7,12 +7,12 @@
   }
   span {
     display: block;
-    background-color: #3a3a3a;
+    background: linear-gradient(135deg, var(--primary), var(--interactive));
     width: 1.6rem;
     height: 1.6rem;
     border-radius: 100%;
     text-align: center;
-    color: white;
+    color: var(--background);
     position: absolute;
     top: -3px;
     right: -3px;
