@@ -36,7 +36,7 @@ Menu.propTypes = {
 
 export const layout = {
   areaId: "header",
-  sortOrder: 1,
+  sortOrder: 5,
 };
 
 export const query = `

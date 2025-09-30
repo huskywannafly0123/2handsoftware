@@ -8,10 +8,10 @@ const {
   OK,
   INTERNAL_SERVER_ERROR
 } = require('@evershop/evershop/src/lib/util/httpStatus');
-const { getSetting } = require('../../../../packages/evershop/src/modules/setting/services/setting');
-const { toPrice } = require('../../../../packages/evershop/src/modules/checkout/services/toPrice');
+const { getSetting } = require('@evershop/evershop/src/modules/setting/services/setting');
+const { toPrice } = require('@evershop/evershop/src/modules/checkout/services/toPrice');
 const { getApiBaseUrl } = require('../../services/getApiBaseUrl');
-const { getContextValue } = require('../../../../packages/evershop/src/modules/graphql/services/contextHelper');
+const { getContextValue } = require('@evershop/evershop/src/modules/graphql/services/contextHelper');
 
 // eslint-disable-next-line no-unused-vars
 module.exports = async (request, response, stack, next) => {

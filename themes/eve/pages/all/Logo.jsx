@@ -14,5 +14,5 @@ export default Logo;
 
 export const layout = {
   areaId: "header",
-  sortOrder: 5,
+  sortOrder: 1,
 };

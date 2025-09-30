@@ -24,7 +24,7 @@ export default function CustomerGrid({
   //   : 20;
   // const [selectedRows, setSelectedRows] = useState([]);
   const accounts = product?.inventory?.accounts || [];
-  console.log('accounts', accounts);
+  // console.log('accounts', accounts);
   return (
     <Card title="Selling account">
       {/* <Card.Session

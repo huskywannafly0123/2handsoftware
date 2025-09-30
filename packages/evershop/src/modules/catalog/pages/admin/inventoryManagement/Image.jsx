@@ -6,10 +6,6 @@ import Button from '@components/common/form/Button';
 import './Image.scss';
 import { Card } from '@components/admin/cms/Card';
 
-const {
-  getContextValue
-} = require('../../../../graphql/services/contextHelper');
-
 export default function Image({ product }) {
   const [loading, setLoading] = useState(false);
   const ref = useRef();
@@ -89,9 +85,9 @@ export default function Image({ product }) {
           toast.success("File uploaded and parsed successfully");
         }
   
-        console.log("parseData: ", parsedData);
-        console.log("product type: ", productType);
-        console.log("sendData: ", newSendData);
+        // console.log("parseData: ", parsedData);
+        // console.log("product type: ", productType);
+        // console.log("sendData: ", newSendData);
       };
   
       reader.onerror = () => {
