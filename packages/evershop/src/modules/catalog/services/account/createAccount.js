@@ -13,6 +13,8 @@ const {
 const {
   getConnection
 } = require('@evershop/evershop/src/lib/postgres/connection');
+const { getEnv } = require('@evershop/evershop/src/lib/util/getEnv');
+const { encrypt, decrypt } = require('@evershop/evershop/src/lib/util/encrypt');
 const { getAjv } = require('../../../base/services/getAjv');
 const accountDataSchema = require('./accountDataSchema.json');
 
@@ -47,9 +49,14 @@ async function validateAccountDataBeforeInsert(data, context, connection) {
 
 async function insertAccountData(data, connection, context) {
   const accounts = [];
+  const secretKey = getEnv('SECRET_KEY');
   data.forEach(async (element, index) => {
     element.product_id = context.productId;
     element.status = 'active';
+    if(element.password && element.username) {
+      const encryptedPassword = encrypt(element.password, secretKey+element.username);
+      element.password = encryptedPassword;
+    }
     const account = await insert('account').given(element).execute(connection);
     if (!account) {
       throw new Error(`Failed to insert account at index ${index}`);

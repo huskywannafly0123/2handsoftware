@@ -78,12 +78,9 @@ module.exports = {
       }
     },
     products: async (_, { filters = [] }, { user }) => {
-      const userId = user.user_id ? user.user_id : user.admin_user_id;
-      const {role} = user;
+
       const query = getProductsBaseQuery();
-      if (role == 'vendor'){
-        query.where('vendor_id', '=', userId);
-      }
+      
       const root = new ProductCollection(query);
       await root.init(filters, !!user);
       return root;

@@ -53,17 +53,6 @@ export default function General({ coupon = {} }) {
             discountAmount: get(coupon, 'discountAmount', '')
           },
           sortOrder: 40
-        },
-        {
-          component: { default: Field },
-          props: {
-            name: 'free_shipping',
-            value: 1,
-            type: 'checkbox',
-            label: 'Free shipping?',
-            isChecked: parseInt(get(coupon, 'freeShipping'), 10) === 1
-          },
-          sortOrder: 50
         }
       ]}
     />

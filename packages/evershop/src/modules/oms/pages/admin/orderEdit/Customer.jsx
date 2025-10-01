@@ -35,12 +35,6 @@ export default function Customer({
           <span>{shippingAddress?.telephone}</span>
         </div>
       </Card.Session>
-      <Card.Session title="Shipping Address">
-        <AddressSummary address={shippingAddress} />
-      </Card.Session>
-      <Card.Session title="Billing address">
-        <AddressSummary address={billingAddress} />
-      </Card.Session>
     </Card>
   );
 }

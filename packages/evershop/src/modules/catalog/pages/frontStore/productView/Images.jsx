@@ -14,7 +14,7 @@ function Current({ image }) {
   return (
     <div
       id="product-current-image"
-      style={{ minHeight: height, background: '#f6f6f6' }}
+      style={{ minHeight: height, background: '#1a1a1f' }}
       className="product-image product-single-page-image flex justify-center items-center"
     >
       {image && (

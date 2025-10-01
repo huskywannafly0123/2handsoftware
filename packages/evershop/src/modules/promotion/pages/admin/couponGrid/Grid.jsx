@@ -255,47 +255,6 @@ export default function CouponGrid({
                       )
                     },
                     sortOrder: 10
-                  },
-                  {
-                    component: {
-                      default: () => (
-                        <Filter
-                          options={[
-                            {
-                              label: 'Free shipping',
-                              value: '1',
-                              onSelect: () => {
-                                const url = new URL(document.location);
-                                url.searchParams.set('free_shipping', 1);
-                                window.location.href = url;
-                              }
-                            },
-                            {
-                              label: 'No free shipping',
-                              value: '0',
-                              onSelect: () => {
-                                const url = new URL(document.location);
-                                url.searchParams.set('free_shipping', 0);
-                                window.location.href = url;
-                              }
-                            }
-                          ]}
-                          selectedOption={
-                            currentFilters.find(
-                              (f) => f.key === 'free_shipping'
-                            )
-                              ? currentFilters.find(
-                                  (f) => f.key === 'free_shipping'
-                                ).value === '1'
-                                ? 'Free shipping'
-                                : 'No free shipping'
-                              : undefined
-                          }
-                          title="Free shipping?"
-                        />
-                      )
-                    },
-                    sortOrder: 10
                   }
                 ]}
                 currentFilters={currentFilters}

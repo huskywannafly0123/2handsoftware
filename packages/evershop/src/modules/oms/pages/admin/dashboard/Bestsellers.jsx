@@ -34,7 +34,7 @@ export default function BestSellers({ bestSellers, listUrl }) {
                   <div className=" flex justify-left">
                     <div className="flex justify-start gap-4 items-center">
                       <div
-                        className="grid-thumbnail text-border border border-divider p-3 rounded"
+                        className="grid-thumbnail text-border border border-divider p-3 rounded flex justify-center"
                         style={{ width: '6rem' }}
                       >
                         {p.image?.thumb && (

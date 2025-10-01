@@ -1,0 +1,22 @@
+html body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  color: var(--text);
+}
+
+a {
+  color: var(--interactive);
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--highlight);
+    text-decoration-color: currentColor;
+  }
+}
+
+::selection {
+  background-color: rgba(139, 92, 246, 0.35);
+  color: var(--onSurface);
+}

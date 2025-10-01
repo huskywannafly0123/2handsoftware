@@ -24,8 +24,8 @@ function OrderSummary({
         count={items.length}
         total={priceIncludingTax ? subTotalInclTax.text : subTotal.text}
       />
-      <Shipping method={shippingMethodName} cost={shippingFeeInclTax.text} />
-      {!priceIncludingTax && <Tax taxClass="" amount={totalTaxAmount.text} />}
+      {/* <Shipping method={shippingMethodName} cost={shippingFeeInclTax.text} /> */}
+      {/* {!priceIncludingTax && <Tax taxClass="" amount={totalTaxAmount.text} />} */}
       <Discount code={coupon} discount={discountAmount.text} />
       <Total
         total={grandTotal.text}

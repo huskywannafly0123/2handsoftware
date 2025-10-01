@@ -7,9 +7,9 @@ const {
   INTERNAL_SERVER_ERROR
 } = require('@evershop/evershop/src/lib/util/httpStatus');
 const { getApiBaseUrl } = require('../../services/getApiBaseUrl');
-const { getSetting } = require('../../../../packages/evershop/src/modules/setting/services/setting');
+const { getSetting } = require('@evershop/evershop/src/modules/setting/services/setting');
 const { error } = require('@evershop/evershop/src/lib/log/logger');
-const { assignAccountsAfterPayment } = require('../../../../packages/evershop/src/modules/checkout/services/orderCreator');
+const { assignAccountsAfterPayment } = require('@evershop/evershop/src/modules/checkout/services/orderCreator');
 
 // eslint-disable-next-line no-unused-vars
 module.exports = async (request, response, delegate, next) => {

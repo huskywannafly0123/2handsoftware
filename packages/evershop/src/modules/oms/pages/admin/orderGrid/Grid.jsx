@@ -9,7 +9,6 @@ import { useAlertContext } from '@components/common/modal/Alert';
 import { Card } from '@components/admin/cms/Card';
 import OrderNumberRow from '@components/admin/oms/orderGrid/rows/OrderNumberRow';
 import BasicRow from '@components/common/grid/rows/BasicRow';
-import ShipmentStatusRow from '@components/admin/oms/orderGrid/rows/ShipmentStatus';
 import PaymentStatusRow from '@components/admin/oms/orderGrid/rows/PaymentStatus';
 import TotalRow from '@components/admin/oms/orderGrid/rows/TotalRow';
 import CreateAt from '@components/admin/customer/customerGrid/rows/CreateAt';
@@ -17,7 +16,7 @@ import { Form } from '@components/common/form/Form';
 import { Field } from '@components/common/form/Field';
 import SortableHeader from '@components/common/grid/headers/Sortable';
 import Filter from '@components/common/list/Filter';
-
+import { _ } from '@evershop/evershop/src/lib/locale/translate';
 function Actions({ orders = [], selectedIds = [] }) {
   const { openAlert, closeAlert } = useAlertContext();
   const [isLoading, setIsLoading] = useState(false);
@@ -106,8 +105,7 @@ Actions.propTypes = {
 
 export default function OrderGrid({
   orders: { items: orders, total, currentFilters = [] },
-  paymentStatusList,
-  shipmentStatusList
+  paymentStatusList
 }) {
   const page = currentFilters.find((filter) => filter.key === 'page')
     ? parseInt(currentFilters.find((filter) => filter.key === 'page').value, 10)
@@ -139,7 +137,7 @@ export default function OrderGrid({
                           type="text"
                           name="keyword"
                           id="keyword"
-                          placeholder="Search"
+                          placeholder="Tìm kiếm"
                           value={
                             currentFilters.find((f) => f.key === 'keyword')
                               ?.value
@@ -168,7 +166,7 @@ export default function OrderGrid({
                       default: () => (
                         <Filter
                           options={paymentStatusList.map((status) => ({
-                            label: status.name,
+                            label: _(status.name),
                             value: status.code,
                             onSelect: () => {
                               const url = new URL(document.location);
@@ -188,43 +186,43 @@ export default function OrderGrid({
                                 ).value
                               : undefined
                           }
-                          title="Payment status"
+                          title="Trạng thái thanh toán"
                         />
                       )
                     },
                     sortOrder: 10
                   },
-                  {
-                    component: {
-                      default: () => (
-                        <Filter
-                          options={shipmentStatusList.map((status) => ({
-                            label: status.name,
-                            value: status.code,
-                            onSelect: () => {
-                              const url = new URL(document.location);
-                              url.searchParams.set(
-                                'shipment_status',
-                                status.code
-                              );
-                              window.location.href = url;
-                            }
-                          }))}
-                          selectedOption={
-                            currentFilters.find(
-                              (f) => f.key === 'shipment_status'
-                            )
-                              ? currentFilters.find(
-                                  (f) => f.key === 'shipment_status'
-                                ).value
-                              : undefined
-                          }
-                          title="Shipment status"
-                        />
-                      )
-                    },
-                    sortOrder: 15
-                  }
+                  // {
+                  //   component: {
+                  //     default: () => (
+                  //       <Filter
+                  //         options={shipmentStatusList.map((status) => ({
+                  //           label: status.name,
+                  //           value: status.code,
+                  //           onSelect: () => {
+                  //             const url = new URL(document.location);
+                  //             url.searchParams.set(
+                  //               'shipment_status',
+                  //               status.code
+                  //             );
+                  //             window.location.href = url;
+                  //           }
+                  //         }))}
+                  //         selectedOption={
+                  //           currentFilters.find(
+                  //             (f) => f.key === 'shipment_status'
+                  //           )
+                  //             ? currentFilters.find(
+                  //                 (f) => f.key === 'shipment_status'
+                  //               ).value
+                  //             : undefined
+                  //         }
+                  //         title="Shipment status"
+                  //       />
+                  //     )
+                  //   },
+                  //   sortOrder: 15
+                  // }
                 ]}
                 currentFilters={currentFilters}
               />
@@ -247,7 +245,7 @@ export default function OrderGrid({
       <table className="listing sticky">
         <thead>
           <tr>
-            <th className="align-bottom">
+            {/* <th className="align-bottom">
               <Checkbox
                 onChange={(e) => {
                   if (e.target.checked) {
@@ -257,7 +255,7 @@ export default function OrderGrid({
                   }
                 }}
               />
-            </th>
+            </th> */}
             <Area
               className=""
               id="orderGridHeader"
@@ -299,18 +297,18 @@ export default function OrderGrid({
                   },
                   sortOrder: 15
                 },
-                {
-                  component: {
-                    default: () => (
-                      <SortableHeader
-                        title="Shipment Status"
-                        name="shipment_status"
-                        currentFilters={currentFilters}
-                      />
-                    )
-                  },
-                  sortOrder: 20
-                },
+                // {
+                //   component: {
+                //     default: () => (
+                //       <SortableHeader
+                //         title="Shipment Status"
+                //         name="shipment_status"
+                //         currentFilters={currentFilters}
+                //       />
+                //     )
+                //   },
+                //   sortOrder: 20
+                // },
                 {
                   component: {
                     default: () => (
@@ -347,7 +345,7 @@ export default function OrderGrid({
           />
           {orders.map((o) => (
             <tr key={o.orderId}>
-              <td>
+              {/* <td>
                 <Checkbox
                   isChecked={selectedRows.includes(o.uuid)}
                   onChange={(e) => {
@@ -360,7 +358,7 @@ export default function OrderGrid({
                     }
                   }}
                 />
-              </td>
+              </td> */}
               <Area
                 className=""
                 id="orderGridRow"
@@ -392,14 +390,14 @@ export default function OrderGrid({
                     },
                     sortOrder: 15
                   },
-                  {
-                    component: {
-                      default: () => (
-                        <ShipmentStatusRow status={o.shipmentStatus} />
-                      )
-                    },
-                    sortOrder: 20
-                  },
+                  // {
+                  //   component: {
+                  //     default: () => (
+                  //       <ShipmentStatusRow status={o.shipmentStatus} />
+                  //     )
+                  //   },
+                  //   sortOrder: 20
+                  // },
                   {
                     component: {
                       default: () => (
@@ -442,12 +440,6 @@ OrderGrid.propTypes = {
           text: PropTypes.string.isRequired
         }).isRequired,
         customerEmail: PropTypes.string.isRequired,
-        shipmentStatus: PropTypes.shape({
-          name: PropTypes.string.isRequired,
-          code: PropTypes.string.isRequired,
-          badge: PropTypes.string.isRequired,
-          progress: PropTypes.string.isRequired
-        }).isRequired,
         paymentStatus: PropTypes.shape({
           name: PropTypes.string.isRequired,
           code: PropTypes.string.isRequired,
@@ -477,12 +469,6 @@ OrderGrid.propTypes = {
       name: PropTypes.string.isRequired
     })
   ).isRequired,
-  shipmentStatusList: PropTypes.arrayOf(
-    PropTypes.shape({
-      code: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired
-    })
-  ).isRequired
 };
 
 export const layout = {
@@ -502,12 +488,6 @@ export const query = `
           text
         }
         customerEmail
-        shipmentStatus {
-          name
-          code
-          badge
-          progress
-        }
         paymentStatus {
           name
           code
@@ -529,10 +509,6 @@ export const query = `
       }
     }
     paymentStatusList {
-      code
-      name
-    }
-    shipmentStatusList {
       code
       name
     }

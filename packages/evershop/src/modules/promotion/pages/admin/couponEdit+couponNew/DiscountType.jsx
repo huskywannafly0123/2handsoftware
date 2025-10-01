@@ -38,10 +38,10 @@ export default function DiscountType({ coupon = {} }) {
                     value: 'percentage_discount_to_specific_products',
                     text: 'Percentage discount to specific products'
                   },
-                  {
-                    value: 'buy_x_get_y',
-                    text: 'Buy X get Y'
-                  }
+                  // {
+                  //   value: 'buy_x_get_y',
+                  //   text: 'Buy X get Y'
+                  // }
                 ],
                 validationRules: ['notEmpty'],
                 type: 'radio'

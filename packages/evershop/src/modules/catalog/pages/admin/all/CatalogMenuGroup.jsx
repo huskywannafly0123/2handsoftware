@@ -13,7 +13,8 @@ export default function CatalogMenuGroup({
   collectionGrid,
   user
 }) {
-  return (
+  if (user && user.role == 'vendor'){
+    return (
     <NavigationItemGroup
       id="catalogMenuGroup"
       name="Catalog"
@@ -22,16 +23,30 @@ export default function CatalogMenuGroup({
           Icon: ProductIcon,
           url: productGrid,
           title: 'Sản phẩm'
+        }
+      ]}
+    />
+  );
+  }
+  return (
+    <NavigationItemGroup
+      id="catalogMenuGroup"
+      name="Catalog"
+      items={[
+         {
+          Icon: ProductIcon,
+          url: productGrid,
+          title: 'Products'
         },
         {
           Icon: CategoryIcon,
           url: categoryGrid,
-          title: 'Danh mục'
+          title: 'Categories'
         },
         {
           Icon: CollectionIcon,
           url: collectionGrid,
-          title: 'Bộ sưu tập'
+          title: 'Collections'
         },
         {
           Icon: AttributeIcon,

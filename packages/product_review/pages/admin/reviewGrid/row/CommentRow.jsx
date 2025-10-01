@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 function CommentRow({ comment }) {
   return (
-    <td width="45%">
+    <td width="30%">
       <div>{comment}</div>
     </td>
   );

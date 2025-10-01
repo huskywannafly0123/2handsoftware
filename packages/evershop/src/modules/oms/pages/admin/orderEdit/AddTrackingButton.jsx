@@ -109,10 +109,10 @@ AddTrackingButton.propTypes = {
   ).isRequired
 };
 
-export const layout = {
-  areaId: 'order_actions',
-  sortOrder: 5
-};
+// export const layout = {
+//   areaId: 'order_actions',
+//   sortOrder: 5
+// };
 
 export const query = `
   query Query {

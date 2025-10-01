@@ -3,6 +3,7 @@ import React from 'react';
 import Button from '@components/common/form/Button';
 import { AddressSummary } from '@components/common/customer/address/AddressSummary';
 import { _ } from '@evershop/evershop/src/lib/locale/translate';
+import { toast } from 'react-toastify';
 
 export default function CustomerInfo({
   order: {
@@ -13,8 +14,9 @@ export default function CustomerInfo({
     paymentStatus,
     shippingAddress,
     billingAddress,
-    accounts = []
-  }
+    accounts = [],
+    sendAccountUrl
+  },
 }) {
   return (
     <div className="checkout-success-customer-info">
@@ -67,12 +69,12 @@ export default function CustomerInfo({
           </div>
         </div>
       </div>
-      
+
       {/* Only show account information if payment status is 'paid' */}
       {paymentStatus?.code === 'paid' && accounts.length > 0 && (
         <div className="account-info mt-8 mb-8 p-4 border border-divider rounded">
           <h3>{_('Account Information')}</h3>
-          <table className="w-full mt-2">
+          {/* <table className="w-full mt-2">
             <thead>
               <tr>
                 <th className="text-left">{_('Username')}</th>
@@ -91,10 +93,26 @@ export default function CustomerInfo({
                 </tr>
               ))}
             </tbody>
-          </table>
+          </table> */}
+          <Button
+            title={_('Send to your email')}
+            outline
+            variant="interactive"
+            onAction={async () => {
+              await fetch(sendAccountUrl, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email: customerEmail })
+              });
+              toast.success('Accounts sent!');
+            }}
+          />
+          
         </div>
       )}
-      
+
       {/* Show payment pending message if payment is not yet completed */}
       {paymentStatus?.code !== 'paid' && (
         <div className="payment-pending-info mt-8 mb-8 p-4 border border-warning rounded bg-warning-light">
@@ -104,7 +122,7 @@ export default function CustomerInfo({
           </p>
         </div>
       )}
-      
+
       <Button url="/" title={_('CONTINUE SHOPPING')} />
     </div>
   );
@@ -154,8 +172,9 @@ CustomerInfo.propTypes = {
       city: PropTypes.string,
       address1: PropTypes.string,
       address2: PropTypes.string
-    })
-  }).isRequired
+    }),
+    sendAccountUrl: PropTypes.string
+  }).isRequired,
 };
 
 export const layout = {
@@ -216,6 +235,7 @@ export const query = `
         key
         expirationDate
       }
+      sendAccountUrl
     }
   }
 `;

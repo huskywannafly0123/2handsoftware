@@ -126,15 +126,15 @@ export default function CheckoutForm({
         confirmParams: {
           payment_method_data: {
             billing_details: {
-              name: billingAddress.fullName,
+              name: billingAddress ? billingAddress.fullName : '',
               email: result.data.cart.customerEmail,
-              phone: billingAddress.telephone,
+              phone: billingAddress ? billingAddress.telephone : '', 
               address: {
-                line1: billingAddress.address1,
-                country: billingAddress.country.code,
-                state: billingAddress.province?.code,
-                postal_code: billingAddress.postcode,
-                city: billingAddress.city
+                // line1: billingAddress ? billingAddress.address1 : '',
+                // country: billingAddress ? billingAddress.country.code : 'VN',
+                // state: billingAddress.province?.code,
+                // postal_code: billingAddress.postcode,
+                // city: billingAddress.city
               }
             }
           },

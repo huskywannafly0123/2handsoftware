@@ -57,10 +57,10 @@ MarkDeliveredButton.propTypes = {
   markDeliveredApi: PropTypes.string.isRequired
 };
 
-export const layout = {
-  areaId: 'order_actions',
-  sortOrder: 10
-};
+// export const layout = {
+//   areaId: 'order_actions',
+//   sortOrder: 10
+// };
 
 export const query = `
   query Query {

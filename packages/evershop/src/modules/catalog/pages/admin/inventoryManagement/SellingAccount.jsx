@@ -1,140 +1,33 @@
 /* eslint-disable no-nested-ternary */
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import axios from 'axios';
 import Area from '@components/common/Area';
 import Pagination from '@components/common/grid/Pagination';
-import { Checkbox } from '@components/common/form/fields/Checkbox';
-import { useAlertContext } from '@components/common/modal/Alert';
 import StatusRow from '@components/common/grid/rows/StatusRow';
 import BasicRow from '@components/common/grid/rows/BasicRow';
 import { Card } from '@components/admin/cms/Card';
 import CustomerNameRow from '@components/admin/customer/customerGrid/rows/CustomerName';
 import CreateAt from '@components/admin/customer/customerGrid/rows/CreateAt';
-import { Form } from '@components/common/form/Form';
-import { Field } from '@components/common/form/Field';
 import SortableHeader from '@components/common/grid/headers/Sortable';
-import Filter from '@components/common/list/Filter';
-
-function Actions({ customers = [], selectedIds = [] }) {
-  const { openAlert, closeAlert } = useAlertContext();
-
-  const updateCustomers = async (status) => {
-    const promises = customers
-      .filter((customer) => selectedIds.includes(customer.uuid))
-      .map((customer) =>
-        axios.patch(customer.updateApi, {
-          status
-        })
-      );
-    await Promise.all(promises);
-    // Refresh the page
-    window.location.reload();
-  };
-
-  const actions = [
-    {
-      name: 'Disable',
-      onAction: () => {
-        openAlert({
-          heading: `Disable ${selectedIds.length} customers`,
-          content: 'Are you sure?',
-          primaryAction: {
-            title: 'Cancel',
-            onAction: closeAlert,
-            variant: 'primary'
-          },
-          secondaryAction: {
-            title: 'Disable',
-            onAction: async () => {
-              await updateCustomers(0);
-            },
-            variant: 'critical',
-            isLoading: false
-          }
-        });
-      }
-    },
-    {
-      name: 'Enable',
-      onAction: () => {
-        openAlert({
-          heading: `Enable ${selectedIds.length} customers`,
-          content: 'Are you sure?',
-          primaryAction: {
-            title: 'Cancel',
-            onAction: closeAlert,
-            variant: 'primary'
-          },
-          secondaryAction: {
-            title: 'Enable',
-            onAction: async () => {
-              await updateCustomers(1);
-            },
-            variant: 'critical',
-            isLoading: false
-          }
-        });
-      }
-    }
-  ];
-
-  return (
-    <tr>
-      {selectedIds.length === 0 && null}
-      {selectedIds.length > 0 && (
-        <td style={{ borderTop: 0 }} colSpan="100">
-          <div className="inline-flex border border-divider rounded justify-items-start">
-            <a href="#" className="font-semibold pt-3 pb-3 pl-6 pr-6">
-              {selectedIds.length} selected
-            </a>
-            {actions.map((action, i) => (
-              <a
-                key={i}
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  action.onAction();
-                }}
-                className="font-semibold pt-3 pb-3 pl-6 pr-6 block border-l border-divider self-center"
-              >
-                <span>{action.name}</span>
-              </a>
-            ))}
-          </div>
-        </td>
-      )}
-    </tr>
-  );
-}
-
-Actions.propTypes = {
-  selectedIds: PropTypes.arrayOf(PropTypes.string).isRequired,
-  customers: PropTypes.arrayOf(
-    PropTypes.shape({
-      uuid: PropTypes.string.isRequired,
-      updateApi: PropTypes.string.isRequired
-    })
-  ).isRequired
-};
 
 export default function CustomerGrid({
-  customers: { items: customers, total, currentFilters = [] }
+  product
 }) {
-  const page = currentFilters.find((filter) => filter.key === 'page')
-    ? parseInt(currentFilters.find((filter) => filter.key === 'page').value, 10)
-    : 1;
-  const limit = currentFilters.find((filter) => filter.key === 'limit')
-    ? parseInt(
-        currentFilters.find((filter) => filter.key === 'limit').value,
-        10
-      )
-    : 20;
-  const [selectedRows, setSelectedRows] = useState([]);
-
+  // const page = currentFilters.find((filter) => filter.key === 'page')
+  //   ? parseInt(currentFilters.find((filter) => filter.key === 'page').value, 10)
+  //   : 1;
+  // const limit = currentFilters.find((filter) => filter.key === 'limit')
+  //   ? parseInt(
+  //       currentFilters.find((filter) => filter.key === 'limit').value,
+  //       10
+  //     )
+  //   : 20;
+  // const [selectedRows, setSelectedRows] = useState([]);
+  const accounts = product?.inventory?.accounts || [];
+  // console.log('accounts', accounts);
   return (
     <Card title="Selling account">
-      <Card.Session
+      {/* <Card.Session
         title={
           <Form submitBtn={false} id="customerGridFilter">
             <div className="flex gap-8 justify-center items-center">
@@ -212,7 +105,7 @@ export default function CustomerGrid({
                     sortOrder: 10
                   }
                 ]}
-                currentFilters={currentFilters}
+                
               />
             </div>
           </Form>
@@ -229,11 +122,11 @@ export default function CustomerGrid({
             }
           }
         ]}
-      />
+      /> */}
       <table className="listing sticky">
         <thead>
           <tr>
-            <th className="align-bottom">
+            {/* <th className="align-bottom">
               <Checkbox
                 onChange={(e) => {
                   if (e.target.checked)
@@ -241,7 +134,7 @@ export default function CustomerGrid({
                   else setSelectedRows([]);
                 }}
               />
-            </th>
+            </th> */}
             <Area
               id="customerGridHeader"
               noOuter
@@ -253,33 +146,33 @@ export default function CustomerGrid({
                       <SortableHeader
                         title="Account"
                         name="account"
-                        currentFilters={currentFilters}
+                        
                       />
                     )
                   },
                   sortOrder: 10
                 },
+                // {
+                //   // eslint-disable-next-line react/no-unstable-nested-components
+                //   component: {
+                //     default: () => (
+                //       <SortableHeader
+                //         title="Created Date"
+                //         name="created_date"
+                        
+                //       />
+                //     )
+                //   },
+                //   sortOrder: 15
+                // },
                 {
                   // eslint-disable-next-line react/no-unstable-nested-components
                   component: {
                     default: () => (
                       <SortableHeader
-                        title="Created Date"
-                        name="created_date"
-                        currentFilters={currentFilters}
-                      />
-                    )
-                  },
-                  sortOrder: 15
-                },
-                {
-                  // eslint-disable-next-line react/no-unstable-nested-components
-                  component: {
-                    default: () => (
-                      <SortableHeader
-                        title="Selled Date"
+                        title="Sold Date"
                         name="selled_date"
-                        currentFilters={currentFilters}
+                        
                       />
                     )
                   },
@@ -292,25 +185,25 @@ export default function CustomerGrid({
                       <SortableHeader
                         title="Status"
                         name="status"
-                        currentFilters={currentFilters}
+                        
                       />
                     )
                   },
-                  sortOrder: 25
+                  sortOrder: 15
                 }
               ]}
             />
           </tr>
         </thead>
         <tbody>
-          <Actions
+          {/* <Actions
             customers={customers}
             selectedIds={selectedRows}
             setSelectedRows={setSelectedRows}
-          />
-          {customers.map((c) => (
-            <tr key={c.customerId}>
-              <td>
+          /> */}
+          {accounts.map((c) => (
+            <tr key={c.username}>
+              {/* <td>
                 <Checkbox
                   isChecked={selectedRows.includes(c.uuid)}
                   onChange={(e) => {
@@ -323,41 +216,35 @@ export default function CustomerGrid({
                     }
                   }}
                 />
-              </td>
+              </td> */}
               <Area
                 id="customerGridRow"
                 row={c}
                 noOuter
-                selectedRows={selectedRows}
-                setSelectedRows={setSelectedRows}
                 coreComponents={[
                   {
                     // eslint-disable-next-line react/no-unstable-nested-components
                     component: {
-                      default: () => (
-                        <CustomerNameRow
-                          id="name"
-                          name={c.fullName}
-                          url={c.editUrl}
-                        />
+                      default: ({ areaProps }) => (
+                        <BasicRow id="username" areaProps={areaProps} />
                       )
                     },
                     sortOrder: 10
                   },
+                  // {
+                  //   // eslint-disable-next-line react/no-unstable-nested-components
+                  //   component: {
+                  //     default: ({ areaProps }) => (
+                  //       <BasicRow id="email" areaProps={areaProps} />
+                  //     )
+                  //   },
+                  //   sortOrder: 15
+                  // },
                   {
                     // eslint-disable-next-line react/no-unstable-nested-components
                     component: {
                       default: ({ areaProps }) => (
-                        <BasicRow id="email" areaProps={areaProps} />
-                      )
-                    },
-                    sortOrder: 15
-                  },
-                  {
-                    // eslint-disable-next-line react/no-unstable-nested-components
-                    component: {
-                      default: ({ areaProps }) => (
-                        <StatusRow id="status" areaProps={areaProps} />
+                        <BasicRow id="status" areaProps={areaProps} />
                       )
                     },
                     sortOrder: 20
@@ -365,7 +252,9 @@ export default function CustomerGrid({
                   {
                     // eslint-disable-next-line react/no-unstable-nested-components
                     component: {
-                      default: () => <CreateAt time={c.createdAt.text} />
+                      default: ({ areaProps }) => (
+                        <BasicRow id="sold_at" areaProps={areaProps} />
+                      )
                     },
                     sortOrder: 25
                   }
@@ -375,42 +264,29 @@ export default function CustomerGrid({
           ))}
         </tbody>
       </table>
-      {customers.length === 0 && (
+      {accounts.length === 0 && (
         <div className="flex w-full justify-center">
           There is no account to display
         </div>
       )}
-      <Pagination total={total} limit={limit} page={page} />
+      {/* <Pagination total={total} limit={limit} page={page} /> */}
     </Card>
   );
 }
 
 CustomerGrid.propTypes = {
-  customers: PropTypes.shape({
-    items: PropTypes.arrayOf(
-      PropTypes.shape({
-        customerId: PropTypes.number.isRequired,
-        uuid: PropTypes.string.isRequired,
-        fullName: PropTypes.string.isRequired,
-        email: PropTypes.string.isRequired,
-        status: PropTypes.number.isRequired,
-        createdAt: PropTypes.shape({
-          value: PropTypes.string.isRequired,
-          text: PropTypes.string.isRequired
-        }).isRequired,
-        editUrl: PropTypes.string.isRequired,
-        updateApi: PropTypes.string.isRequired
-      })
-    ).isRequired,
-    total: PropTypes.number.isRequired,
-    currentFilters: PropTypes.arrayOf(
-      PropTypes.shape({
-        key: PropTypes.string.isRequired,
-        operation: PropTypes.string.isRequired,
-        value: PropTypes.string.isRequired
-      })
-    ).isRequired
-  }).isRequired
+  product: PropTypes.shape({
+    inventory: PropTypes.shape({
+      qty: PropTypes.number,
+      accounts: PropTypes.arrayOf(
+        PropTypes.shape({
+          username: PropTypes.string,
+          status: PropTypes.string,
+          sold_at: PropTypes.string
+        })
+      )
+    })
+  })
 };
 
 export const layout = {
@@ -419,26 +295,15 @@ export const layout = {
 };
 
 export const query = `
-  query Query($filters: [FilterInput]) {
-    customers (filters: $filters) {
-      items {
-        customerId
-        uuid
-        fullName
-        email
-        status
-        createdAt {
-          value
-          text
+  query Query {
+    product(id: getContextValue("productId", null)) {
+      inventory {
+        qty
+        accounts {
+          username
+          status
+          sold_at
         }
-        editUrl
-        updateApi
-      }
-      total
-      currentFilters {
-        key
-        operation
-        value
       }
     }
   }

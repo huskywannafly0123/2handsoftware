@@ -12,11 +12,37 @@
                 "resolve": "extensions/vendor_role",
                 "enabled": true,
                 "priority": 5
+            },
+            {
+                "name": "product_review",
+                "resolve": "packages/product_review",
+                "enabled": true,
+                "priority": 10
+            },
+            {
+                "name": "tawk_widget",
+                "resolve": "node_modules/evershop_tawk_widget",
+                "enabled": true,
+                "priority": 20
+            },
+            {
+                "name": "resend",
+                "resolve": "node_modules/@evershop/resend",
+                "enabled": true,
+                "priority": 30
+            },
+             {
+                "name": "s3_file_storage",
+                "resolve": "node_modules/@evershop/s3_file_storage",
+                "enabled": true,
+                "priority": 40
             }
-        ]
+        ],
+        "theme": "eve",
+        "file_storage": "s3"
     },
     "shop": {
         "currency": "VND",
-        "language": "vi"
+        "language": "en"
     }
 }

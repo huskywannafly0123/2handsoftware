@@ -48,21 +48,21 @@ module.exports = () => {
   const defaultResendConfig = {
     from: 'Customer Service <hello@resend.dev>',
     events: {
-      order_placed: {
-        subject: 'Order Confirmation',
-        enabled: true,
-        templatePath: undefined // This is the path to the email template. Starting from the root of the project.
-      },
+      // order_placed: {
+      //   subject: 'Order Confirmation',
+      //   enabled: true,
+      //   templatePath: 'packages/resend/email_template_examples/order_confirmation.html' // This is the path to the email template. Starting from the root of the project.
+      // },
       reset_password: {
         subject: 'Reset Password',
         enabled: true,
-        templatePath: undefined // This is the path to the email template. Starting from the root of the project.
+        templatePath: 'packages/resend/email_template_examples/reset_password.html' // This is the path to the email template. Starting from the root of the project.
       },
-      customer_registered: {
-        subject: 'Welcome to Evershop',
-        enabled: true,
-        templatePath: undefined // This is the path to the email template. Starting from the root of the project.
-      }
+      // customer_registered: {
+      //   subject: 'Welcome to Our Store',
+      //   enabled: true,
+      //   templatePath: 'packages/resend/email_template_examples/customer_registered.html' // This is the path to the email template. Starting from the root of the project.
+      // }
     }
   };
   config.util.setModuleDefaults('resend', defaultResendConfig);

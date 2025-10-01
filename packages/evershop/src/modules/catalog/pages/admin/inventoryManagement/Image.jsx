@@ -6,10 +6,6 @@ import Button from '@components/common/form/Button';
 import './Image.scss';
 import { Card } from '@components/admin/cms/Card';
 
-const {
-  getContextValue
-} = require('../../../../graphql/services/contextHelper');
-
 export default function Image({ product }) {
   const [loading, setLoading] = useState(false);
   const ref = useRef();
@@ -89,9 +85,9 @@ export default function Image({ product }) {
           toast.success("File uploaded and parsed successfully");
         }
   
-        console.log("parseData: ", parsedData);
-        console.log("product type: ", productType);
-        console.log("sendData: ", newSendData);
+        // console.log("parseData: ", parsedData);
+        // console.log("product type: ", productType);
+        // console.log("sendData: ", newSendData);
       };
   
       reader.onerror = () => {
@@ -144,7 +140,7 @@ export default function Image({ product }) {
     //   });
   
 
-  return (
+  return ( <>
     <Card
       title="Upload file(txt)"
     >
@@ -228,7 +224,15 @@ export default function Image({ product }) {
           )}
         </div>
       </Card.Session>
+    {sendData.length > 0 && <div className="text-base text-neutral-900 px-5 py-4">Uploaded {sendData.length} item{sendData.length > 1 ? 's' : ''}
+      <ul>
+        {sendData.map((item, index) => (
+          <li key={index}>{item.username}</li>
+        ))}
+      </ul>
+    </div>}
     </Card>
+    </>
   );
 }
 

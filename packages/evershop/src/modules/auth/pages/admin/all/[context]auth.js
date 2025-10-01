@@ -7,7 +7,7 @@ module.exports = async (request, response, delegate, next) => {
   const customerID = this.session?.customerID;
   const storeName = this.session?.storeName;
 
-  console.log('storeName after', storeName);
+  // console.log('storeName after', storeName);
   // Load the user from the database
   const user = await select()
     .from('admin_user')
@@ -21,8 +21,6 @@ module.exports = async (request, response, delegate, next) => {
   .and('status', '=', 1)
   .load(pool);
 
-  console.log('customer after', customer);
-  console.log('customerID after', customerID);
 
   if (!user && !customer && !storeName) {
     // The user may not be logged in, or the account may be disabled

@@ -30,9 +30,6 @@ export default function OrderHistory({ customer: { orders = [] } }) {
                   <span>{order.paymentStatus.name}</span>
                 </div>
                 <div>
-                  <span>{order.shipmentStatus.name}</span>
-                </div>
-                <div>
                   <span>{order.grandTotal.text}</span>
                 </div>
               </div>

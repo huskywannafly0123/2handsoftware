@@ -5,7 +5,7 @@ import { _ } from '@evershop/evershop/src/lib/locale/translate';
 export function Total({ total, totalTaxAmount, priceIncludingTax }) {
   return (
     <div className="summary-row grand-total flex justify-between">
-      {(priceIncludingTax && (
+      {/* {(priceIncludingTax && (
         <div>
           <div>
             <div className="font-bold">
@@ -18,7 +18,8 @@ export function Total({ total, totalTaxAmount, priceIncludingTax }) {
             </div>
           </div>
         </div>
-      )) || <span className="self-center font-bold">{_('Total')}</span>}
+      )) ||  */}
+      <span className="self-center font-bold">{_('Total')}</span>
       <div>
         <div />
         <div className="grand-total-value">{total}</div>
