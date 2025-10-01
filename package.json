@@ -54,6 +54,11 @@
     "webpack-bundle-analyzer": "^4.5.0"
   },
   "dependencies": {
-    "@evershop/evershop": "^1.2.2"
+    "@evershop/evershop": "^1.2.2",
+    "evershop_tawk_widget": "^1.0.7"
+  },
+  "engines": {
+    "node": "20.x",
+    "npm": "10.x"
   }
 }
