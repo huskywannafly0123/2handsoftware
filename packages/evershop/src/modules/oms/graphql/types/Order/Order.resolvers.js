@@ -35,6 +35,9 @@ module.exports = {
         .execute(pool);
       return accounts.map((a) => camelCase(a));
     },
+    sendAccountUrl: ({orderId}) => {
+      return buildUrl("sendAccount", {orderId});
+    },
     shippingAddress: async ({ shippingAddressId }, _, { pool }) => {
       const address = await select()
         .from('order_address')

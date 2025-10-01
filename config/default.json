@@ -24,9 +24,22 @@
                 "resolve": "node_modules/evershop_tawk_widget",
                 "enabled": true,
                 "priority": 20
+            },
+            {
+                "name": "resend",
+                "resolve": "node_modules/@evershop/resend",
+                "enabled": true,
+                "priority": 30
+            },
+             {
+                "name": "s3_file_storage",
+                "resolve": "node_modules/@evershop/s3_file_storage",
+                "enabled": true,
+                "priority": 40
             }
         ],
-        "theme": "eve"
+        "theme": "eve",
+        "file_storage": "s3"
     },
     "shop": {
         "currency": "VND",

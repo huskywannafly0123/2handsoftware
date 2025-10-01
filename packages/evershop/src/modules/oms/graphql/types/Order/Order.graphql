@@ -91,6 +91,7 @@ type Order implements ShoppingCart {
   activities: [Activity]
   shipment: Shipment
   accounts: [Account]
+  sendAccountUrl: String
 }
 
 """

@@ -3,7 +3,7 @@ const { default: axios } = require('axios');
 const { pool } = require('@evershop/evershop/src/lib/postgres/connection');
 const { buildUrl } = require('@evershop/evershop/src/lib/router/buildUrl');
 const { emit } = require('@evershop/evershop/src/lib/event/emitter');
-const { getContextValue } = require('../../../../../packages/evershop/src/modules/graphql/services/contextHelper');
+const { getContextValue } = require('@evershop/evershop/src/modules/graphql/services/contextHelper');
 
 module.exports = async (request, response, delegate, next) => {
   // Get paypal token from query string
