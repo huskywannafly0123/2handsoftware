@@ -1079,6 +1079,7 @@ async function getConnection(pool) {
     released = true;
     return realRelease.apply(connection, args);
   };
+  return connection;
 }
 
 async function startTransaction(connection) {
