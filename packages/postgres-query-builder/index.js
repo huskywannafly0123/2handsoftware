@@ -317,9 +317,8 @@ class Join {
 
     let stm = '';
     this._joins.forEach((join) => {
-      stm += `${join.type} "${join.table}" AS "${
-        join.alias
-      }" ${join.on.render()} `;
+      stm += `${join.type} "${join.table}" AS "${join.alias
+        }" ${join.on.render()} `;
       Object.assign(this._query._binding, join.on.getBinding());
     });
     return stm;
@@ -414,9 +413,8 @@ class Limit {
     if ((this._offset === this._limit) === null) {
       return '';
     }
-    return `LIMIT ${this._limit === null ? null : this._limit} OFFSET ${
-      +this._offset || 0
-    } `;
+    return `LIMIT ${this._limit === null ? null : this._limit} OFFSET ${+this._offset || 0
+      } `;
   }
 
   clone() {
@@ -1070,7 +1068,17 @@ function node(link) {
 
 /* Create a connection from a pool */
 async function getConnection(pool) {
-  return await pool.connect();
+  const connection = await pool.connect();
+  const realRelease = connection.release;
+  let released = false;
+  connection.release = (...args) => {
+    if (released) {
+      console.trace('Client released twice');
+      return;
+    }
+    released = true;
+    return realRelease.apply(connection, args);
+  };
 }
 
 async function startTransaction(connection) {
