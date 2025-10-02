@@ -326,8 +326,6 @@ async function updateProductData(uuid, data, connection) {
  * @param {Object} context
  */
 async function updateProduct(uuid, data, context) {
-  const {user} = context;
-  const userId = user.user_id ? user.user_id : user.admin_user_id;
   const connection = await getConnection();
   await startTransaction(connection);
   try {
@@ -342,23 +340,6 @@ async function updateProduct(uuid, data, context) {
 
     const productData = await getValue('productDataBeforeUpdate', data);
 
-    if (user.role === 'vendor') {
-      if (currentProduct.vendor_id != userId) throw new Error("Cannot edit someone else's product")
-    }
-    if (currentProduct.status != productData.status) {
-      delete productData.status;
-    }
-    if (currentProduct.vendor_id != productData.vendor_id) {
-      delete productData.vendor_id;
-    }
-    if (user.role === 'admin' && product.vendor_id) {
-      const allowedFields = ['status'];
-      for (const field in productData) {
-        if (!allowedFields.includes(field)) {
-          delete updateFields[field]; // strip out any detail changes
-        }
-      }
-    }
     // Validate product data
     validateProductDataBeforeUpdate(productData);
 

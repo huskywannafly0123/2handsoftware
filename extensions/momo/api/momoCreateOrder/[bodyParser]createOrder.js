@@ -77,9 +77,6 @@ module.exports = async (request, response, stack, next) => {
         validateStatus: (status) => status < 500
       }
     );
-    console.log('Order data', orderData);
-    console.log('Return value', data);
-
     if (data.orderId) {
       // Update order and insert papal order id
       await update('order')
