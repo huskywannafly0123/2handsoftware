@@ -32,14 +32,14 @@
                 "priority": 30
             },
              {
-                "name": "s3_file_storage",
-                "resolve": "node_modules/@evershop/s3_file_storage",
+                "name": "local_storage",
+                "resolve": "@evershop/evershop/src/modules/cms/services/uploadFile",
                 "enabled": true,
                 "priority": 40
             }
         ],
         "theme": "eve",
-        "file_storage": "s3"
+        "file_storage": "local"
     },
     "shop": {
         "currency": "VND",

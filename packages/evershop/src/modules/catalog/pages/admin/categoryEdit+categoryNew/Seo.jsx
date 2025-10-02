@@ -31,7 +31,7 @@ export default function Seo({ category }) {
     {
       component: { default: Field },
       props: {
-        id: 'metakeywords',
+        id: 'metaKeywords',
         name: 'meta_keywords',
         label: 'Meta keywords',
         type: 'text'

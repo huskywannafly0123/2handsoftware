@@ -137,7 +137,7 @@ export default function OrderGrid({
                           type="text"
                           name="keyword"
                           id="keyword"
-                          placeholder="Tìm kiếm"
+                          placeholder="Search"
                           value={
                             currentFilters.find((f) => f.key === 'keyword')
                               ?.value
@@ -186,7 +186,7 @@ export default function OrderGrid({
                                 ).value
                               : undefined
                           }
-                          title="Trạng thái thanh toán"
+                          title="Status"
                         />
                       )
                     },

@@ -73,43 +73,6 @@ export default function LifetimeSale({ api }) {
               <Dot variant="info" />
               <div className="self-center">{total} lifetime sale</div>
             </div>
-            <div className="flex space-x-4 items-center">
-              <Dot variant="success" />
-              <div className="self-center">
-                {completed_percentage}% of orders completed
-              </div>
-            </div>
-            <div className="flex space-x-4 items-center">
-              <Dot variant="critical" />
-              <div className="self-center">
-                {cancelled_percentage}% of orders cancelled
-              </div>
-            </div>
-          </div>
-        </Card.Session>
-        <Card.Session>
-          <div style={{ height: '200px' }}>
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={chartData}
-                  labelLine={false}
-                  fill="#8884d8"
-                  dataKey="value"
-                  label
-                >
-                  {
-                    // eslint-disable-next-line react/no-array-index-key
-                    chartData.map((entry, index) => (
-                      <Cell
-                        key={`cell-${index}`}
-                        fill={COLORS[index % COLORS.length]}
-                      />
-                    ))
-                  }
-                </Pie>
-              </PieChart>
-            </ResponsiveContainer>
           </div>
         </Card.Session>
       </Card>
