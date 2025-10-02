@@ -39,7 +39,9 @@ async function deleteCustomerAddress(uuid, context) {
   } catch (e) {
     await rollback(connection);
     throw e;
-  }
+  }finally {
+      connection.release();
+    }
 }
 
 module.exports = async (uuid, context) => {

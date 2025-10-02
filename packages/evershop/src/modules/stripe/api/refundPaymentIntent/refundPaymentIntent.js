@@ -101,5 +101,7 @@ module.exports = async (request, response, delegate, next) => {
         message: err.message
       }
     });
-  }
+  }finally {
+      connection.release();
+    }
 };

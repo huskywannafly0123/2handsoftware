@@ -61,5 +61,7 @@ module.exports = async (request, response, delegate, next) => {
         message: error.message
       }
     });
-  }
+  }finally {
+      connection.release();
+    }
 };

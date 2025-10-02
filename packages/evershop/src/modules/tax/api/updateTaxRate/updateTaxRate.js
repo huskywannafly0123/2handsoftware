@@ -18,11 +18,11 @@ const {
 // eslint-disable-next-line no-unused-vars
 module.exports = async (request, response, deledate, next) => {
   const connection = await getConnection();
-  await startTransaction(connection);
   const { id } = request.params;
   const { name, country, province, postcode, rate, is_compound, priority } =
-    request.body;
+  request.body;
   try {
+    await startTransaction(connection);
     const taxRate = await select()
       .from('tax_rate')
       .where('uuid', '=', id)
@@ -65,5 +65,7 @@ module.exports = async (request, response, deledate, next) => {
         message: e.message
       }
     });
+  } finally {
+    connection.release();
   }
 };

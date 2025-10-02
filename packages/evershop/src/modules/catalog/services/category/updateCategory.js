@@ -97,7 +97,9 @@ async function updateCategory(uuid, data, context) {
   } catch (e) {
     await rollback(connection);
     throw e;
-  }
+  }finally {
+      connection.release();
+    }
 }
 
 module.exports = async (uuid, data, context) => {

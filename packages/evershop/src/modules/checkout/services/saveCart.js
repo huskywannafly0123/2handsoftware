@@ -89,5 +89,7 @@ exports.saveCart = async (cart) => {
   } catch (error) {
     await rollback(connection);
     throw error;
-  }
+  }finally {
+      connection.release();
+    }
 };

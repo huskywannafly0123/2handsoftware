@@ -50,13 +50,15 @@ async function deleteProduct(uuid, context) {
   } catch (e) {
     await rollback(connection);
     throw e;
-  }
+  }finally {
+      connection.release();
+    }
 }
 
 module.exports = async (uuid, context) => {
   const connection = await getConnection();
-  await startTransaction(connection);
   try {
+    await startTransaction(connection);
     const hookContext = {
       connection
     };
@@ -75,5 +77,7 @@ module.exports = async (uuid, context) => {
   } catch (e) {
     await rollback(connection);
     throw e;
+  } finally {
+    connection.release();
   }
 };

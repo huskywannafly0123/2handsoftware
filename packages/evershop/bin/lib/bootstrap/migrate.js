@@ -76,12 +76,15 @@ async function migrateModule(module) {
         `Migration failed for module ${module.name}, version ${version}\n${e}`
       );
     }
+    finally {
+      connection.release();
+    }
   }
 }
 
 module.exports.migrate = async function migrate(modules) {
+  const connection = await getConnection();
   try {
-    const connection = await getConnection();
     // Create a migration table if not exists. This is for the first time installation
     await createMigrationTable(connection);
     // eslint-disable-next-line no-restricted-syntax
@@ -91,5 +94,8 @@ module.exports.migrate = async function migrate(modules) {
   } catch (e) {
     error(e);
     process.exit(0);
+  }
+  finally {
+    connection.release();
   }
 };

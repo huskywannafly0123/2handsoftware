@@ -76,6 +76,7 @@ async function insertAccountData(data, connection, context) {
  * @param {Object} context
  */
 async function createAccount(data, context, connection) {
+  const connection1 = await getConnection();
   try {
     let accountData = await getValue('accountDataBeforeCreate', data);
     accountData = JSON.parse(accountData.sendData);
@@ -83,7 +84,6 @@ async function createAccount(data, context, connection) {
     validateAccountDataBeforeInsert(accountData, context, connection);
     console.log('accountData', accountData);
     // Insert account data
-    const connection1 = await getConnection();
     await startTransaction(connection1);
     const account = await hookable(insertAccountData, context)(
       accountData,
@@ -96,6 +96,9 @@ async function createAccount(data, context, connection) {
     await rollback(connection1);
     throw e;
   }
+  finally {
+      connection1.release();
+    }
 }
 
 module.exports = async (data, context) => {
@@ -113,5 +116,6 @@ module.exports = async (data, context) => {
   context.productId = product.product_id;
   commit(connection);
   const account = await hookable(createAccount, context)(data, context, connection);
+  connection.release();
   return account;
 };

@@ -55,7 +55,9 @@ async function updatePassword(customerId, newPassword, context) {
   } catch (e) {
     await rollback(connection);
     throw e;
-  }
+  }finally {
+      connection.release();
+    }
 }
 
 module.exports = async (customerId, password, context) => {

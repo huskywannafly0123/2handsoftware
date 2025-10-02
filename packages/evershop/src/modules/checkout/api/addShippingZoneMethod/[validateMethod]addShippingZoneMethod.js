@@ -107,5 +107,7 @@ module.exports = async (request, response, deledate, next) => {
         message: e.message
       }
     });
-  }
+  }finally {
+      connection.release();
+    }
 };

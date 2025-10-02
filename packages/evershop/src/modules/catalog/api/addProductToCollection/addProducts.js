@@ -99,4 +99,7 @@ module.exports = async (request, response, delegate, next) => {
       message: e.message
     });
   }
+  finally {
+    connection.release();
+  }
 };

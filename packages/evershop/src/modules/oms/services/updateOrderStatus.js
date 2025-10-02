@@ -96,6 +96,7 @@ module.exports = {
     if (statusFlow.indexOf(order.status) > statusFlow.indexOf(status)) {
       throw new Error('Can not revert the status of the order');
     }
+    const hasConn = !!conn;
     const connection = conn || (await getConnection(pool));
     try {
       if (!conn) {
@@ -121,6 +122,9 @@ module.exports = {
         await rollback(connection);
       }
       throw err;
+    } finally {
+      if (!hasConn)
+        connection.release();
     }
   }
 };

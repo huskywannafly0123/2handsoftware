@@ -150,5 +150,7 @@ module.exports = async (request, response, delegate, next) => {
     error(err);
     await rollback(connection);
     response.status(400).send(`Webhook Error: ${err.message}`);
+  } finally {
+    connection.release();
   }
 };

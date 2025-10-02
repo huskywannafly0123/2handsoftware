@@ -55,8 +55,8 @@ async function insertCustomerData(data, connection) {
  */
 async function createCustomer(data, context) {
   const connection = await getConnection();
-  await startTransaction(connection);
   try {
+    await startTransaction(connection);
     const customerData = await getValue(
       'customerDataBeforeCreate',
       data,
@@ -99,6 +99,8 @@ async function createCustomer(data, context) {
   } catch (e) {
     await rollback(connection);
     throw e;
+  } finally {
+    connection.release();
   }
 }
 

@@ -118,4 +118,7 @@ module.exports = async (request, response, delegate, next) => {
       }
     });
   }
+  finally {
+    connection.release();
+  }
 };

@@ -29,6 +29,7 @@ async function changePaymentStatus(orderId, status, connection) {
 }
 
 module.exports.updatePaymentStatus = async (orderId, status, conn) => {
+  const hasConn = !!conn;
   const connection = conn || (await getConnection(pool));
   try {
     if (!conn) {
@@ -49,5 +50,9 @@ module.exports.updatePaymentStatus = async (orderId, status, conn) => {
       await rollback(connection);
     }
     throw err;
+  }
+  finally {
+    if (hasConn)
+      connection.release();
   }
 };

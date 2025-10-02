@@ -30,6 +30,7 @@ async function changeShipmentStatus(orderId, status, connection) {
 
 module.exports = {
   updateShipmentStatus: async (orderId, status, conn) => {
+    const hasConn = !!conn;
     const connection = conn || (await getConnection(pool));
     try {
       if (!conn) {
@@ -49,6 +50,11 @@ module.exports = {
         await rollback(connection);
       }
       throw err;
+    }
+    finally {
+      if (!hasConn) {
+        connection.release();
+      }
     }
   }
 };

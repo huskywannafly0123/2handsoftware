@@ -19,9 +19,9 @@ const {
 module.exports = async (request, response, deledate, next) => {
   const { id } = request.params;
   const connection = await getConnection();
-  await startTransaction(connection);
   const { name } = request.body;
   try {
+    await startTransaction(connection);
     // Load the tax class
     const taxClass = await select()
       .from('tax_class')
@@ -59,5 +59,7 @@ module.exports = async (request, response, deledate, next) => {
         message: e.message
       }
     });
+  } finally {
+    connection.release();
   }
 };

@@ -11,8 +11,8 @@ const { select } = require('@evershop/postgres-query-builder');
 const { Resend } = require('resend');
 // eslint-disable-next-line no-unused-vars
 module.exports = async (request, response, delegate) => {
+  const connection = await getConnection();
   try {
-    const connection = await getConnection();
     const query = select().from('account').where('order_id', '=', request.params.orderId);
     const accounts = await query.load(connection);
     const secretKey = getEnv('SECRET_KEY');
@@ -45,10 +45,14 @@ module.exports = async (request, response, delegate) => {
         text: `Here are your account details:\n\n${accountsText}`
       });
     }
+    connection1.release();
   }
   catch (error) {
     console.error("Error sending account detail:", error);
   }
+  finally {
+      connection.release();
+    }
   response.status(OK);
 };
 
