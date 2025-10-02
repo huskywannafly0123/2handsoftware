@@ -1100,7 +1100,11 @@ function release(connection) {
   if (connection.constructor.name === 'BoundPool') {
     return;
   }
-  connection.release();
+  try {
+    connection.release();
+  } catch (error) {
+    console.error('Error releasing connection:', error);
+  }
 }
 
 async function execute(connection, query) {
