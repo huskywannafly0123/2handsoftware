@@ -32,8 +32,8 @@
                 "priority": 30
             },
              {
-                "name": "local_storage",
-                "resolve": "@evershop/evershop/src/modules/cms/services/uploadFile",
+                "name": "s3_file_storage",
+                "resolve": "node_modules/@evershop/s3_file_storage",
                 "enabled": true,
                 "priority": 40
             }
