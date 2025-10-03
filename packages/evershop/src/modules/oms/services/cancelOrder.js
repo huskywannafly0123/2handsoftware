@@ -104,9 +104,7 @@ async function cancelOrder(uuid, reason) {
     error(err);
     await rollback(connection);
     throw err;
-  }finally {
-      connection.release();
-    }
+  }
 }
 
 module.exports.cancelOrder = async (uuid, reason) => {

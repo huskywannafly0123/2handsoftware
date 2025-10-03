@@ -116,6 +116,5 @@ module.exports = async (data, context) => {
   context.productId = product.product_id;
   commit(connection);
   const account = await hookable(createAccount, context)(data, context, connection);
-  connection.release();
   return account;
 };

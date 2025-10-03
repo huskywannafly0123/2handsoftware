@@ -51,10 +51,5 @@ module.exports = {
       }
       throw err;
     }
-    finally {
-      if (!hasConn) {
-        connection.release();
-      }
-    }
   }
 };

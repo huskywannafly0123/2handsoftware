@@ -51,8 +51,4 @@ module.exports.updatePaymentStatus = async (orderId, status, conn) => {
     }
     throw err;
   }
-  finally {
-    if (hasConn)
-      connection.release();
-  }
 };

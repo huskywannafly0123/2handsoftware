@@ -60,9 +60,7 @@ async function createWidget(data, context) {
   } catch (e) {
     await rollback(connection);
     throw e;
-  }finally {
-      connection.release();
-    }
+  }
 }
 
 module.exports = async (data, context) => {

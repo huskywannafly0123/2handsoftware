@@ -122,9 +122,6 @@ module.exports = {
         await rollback(connection);
       }
       throw err;
-    } finally {
-      if (!hasConn)
-        connection.release();
     }
   }
 };
