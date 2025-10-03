@@ -50,9 +50,6 @@ module.exports = async (request, response, delegate) => {
   catch (error) {
     console.error("Error sending account detail:", error);
   }
-  finally {
-      connection.release();
-    }
   response.status(OK);
 };
 
