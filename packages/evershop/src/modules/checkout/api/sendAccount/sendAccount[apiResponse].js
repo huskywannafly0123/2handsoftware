@@ -9,6 +9,7 @@ const {
 const { getEnv } = require('@evershop/evershop/src/lib/util/getEnv');
 const { select } = require('@evershop/postgres-query-builder');
 const { Resend } = require('resend');
+const { decrypt } = require('@evershop/evershop/src/lib/util/encrypt');
 // eslint-disable-next-line no-unused-vars
 module.exports = async (request, response, delegate) => {
   const connection = await getConnection();
@@ -45,7 +46,6 @@ module.exports = async (request, response, delegate) => {
         text: `Here are your account details:\n\n${accountsText}`
       });
     }
-    connection1.release();
   }
   catch (error) {
     console.error("Error sending account detail:", error);

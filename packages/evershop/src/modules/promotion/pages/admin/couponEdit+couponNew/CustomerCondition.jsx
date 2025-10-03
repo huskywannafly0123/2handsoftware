@@ -36,27 +36,6 @@ export default function CustomerCondition({
       id="couponCustomerCondition"
       coreComponents={[
         {
-          component: {
-            // eslint-disable-next-line react/no-unstable-nested-components
-            default: () => (
-              <Select
-                name="user_condition[groups][]"
-                options={customerGroups.map((group) => ({
-                  value: group.value.toString(),
-                  label: group.name
-                }))}
-                hideSelectedOptions
-                isMulti
-                defaultValue={selectedGroups}
-                styles={customStyles}
-              />
-            )
-          },
-          props: {},
-          sortOrder: 10,
-          id: 'couponCustomerConditionGroup'
-        },
-        {
           component: { default: Field },
           props: {
             type: 'input',

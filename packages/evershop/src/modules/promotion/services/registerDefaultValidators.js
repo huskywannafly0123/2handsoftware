@@ -87,9 +87,7 @@ module.exports.registerDefaultValidators =
           ? parseFloat(conditions.order_total)
           : null;
         if (
-          minimumSubTotal && priceIncludingTax
-            ? cart.getData('sub_total_incl_tax')
-            : cart.getData('sub_total') < minimumSubTotal
+          minimumSubTotal && cart.getData('sub_total') < minimumSubTotal
         ) {
           return false;
         }
@@ -292,8 +290,9 @@ module.exports.registerDefaultValidators =
         let flag = true;
         const items = cart.getItems();
         const conditions = coupon.condition;
+        console.log("conditions", conditions);
         const requiredProducts = conditions.required_products || [];
-        if (requiredProducts.length === 0) {
+        if (requiredProducts.length === 0 || requiredProducts.key !== 'price') {
           return true;
         }
         for (let index = 0; index < requiredProducts.length; index += 1) {
@@ -379,7 +378,6 @@ module.exports.registerDefaultValidators =
             flag = false;
           }
         }
-
         return flag;
       },
       async function customerGroupValidator() {

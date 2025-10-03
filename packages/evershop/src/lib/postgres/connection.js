@@ -12,7 +12,7 @@ const connectionSetting = {
   database: process.env.DB_NAME || getConfig('system.database.database'),
   max: 20,
   idleTimeoutMillis: 6000,  // Close idle connections after 3 seconds
-  connectionTimeoutMillis: 2000, // Fail fast if can't get a connection
+  connectionTimeoutMillis: 20000, // Fail fast if can't get a connection
 };
 
 // Support SSL
